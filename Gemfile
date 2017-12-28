@@ -65,6 +65,8 @@ gem 'omniauth'
 gem 'twitter'
 gem 'oa-oauth'
 gem 'koala'
+gem 'rspotify'
+
 
 gem 'will_paginate'
 
