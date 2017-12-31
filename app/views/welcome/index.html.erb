@@ -1,1 +1,6 @@
-<p>ok</p>
+
+<%- if current_user.present? %>
+  <h1>こんにちは、<%= current_user.name %>さん</h1>
+<%- else%>
+  <h1>こんにちは、ログインしてください</h1>
+<%- end%>
