@@ -54,7 +54,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # paperclip系
 gem "paperclip", "~> 4.2"
-gem 'rmagick'
+#gem 'rmagick' #error
 
 #SNSログイン&その他SNS系
 gem 'omniauth-twitter'
