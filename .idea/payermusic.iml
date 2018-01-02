@@ -24,6 +24,7 @@
     </content>
     <orderEntry type="jdk" jdkName="ruby-2.0.0-p648" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v1.16.1, ruby-2.0.0-p648) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />
