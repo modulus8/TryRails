@@ -12,5 +12,4 @@ table
         td = track.t_id
         td = track.artist_name
         td = link_to 'Show', track
-        td = link_to 'Edit', edit_track_path(track)
         td = link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' }

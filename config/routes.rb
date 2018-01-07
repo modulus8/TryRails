@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :tracks
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root :to => "welcome#index"
@@ -9,15 +8,11 @@ Rails.application.routes.draw do
   }
 
   resources :tracks do
-    collection do
-      get "index"
-    end
-
-    member do
-      get "show"
-    end
   end
 
-
+  resources :rspotify do
+  end
+  get '/auth/spotify/callback', to: 'rspotify#log_in'
+  get '/log_out', to: 'rspotify#log_out'
 
 end
