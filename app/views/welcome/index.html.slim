@@ -1,0 +1,16 @@
+- if @current_user.present?
+  p
+    | こんにちは、
+    strong
+      = @current_user.name
+    | さん
+
+- else
+  p
+    | こんにちは、
+    strong ログイン
+    | してください
+
+
+- if @tracks.present?
+  = render "shared/tracks_list"

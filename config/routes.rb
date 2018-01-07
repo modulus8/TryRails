@@ -7,4 +7,12 @@ Rails.application.routes.draw do
       sessions: 'users/sessions'
   }
 
+  resources :tracks do
+  end
+
+  resources :rspotify do
+  end
+  get '/auth/spotify/callback', to: 'rspotify#log_in'
+  get '/log_out', to: 'rspotify#log_out'
+
 end
