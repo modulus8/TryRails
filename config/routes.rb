@@ -15,4 +15,9 @@ Rails.application.routes.draw do
   get '/auth/spotify/callback', to: 'rspotify#log_in'
   get '/log_out', to: 'rspotify#log_out'
 
+
+  #admin
+  resources :admin, :only => [:index] do
+  end
+
 end
