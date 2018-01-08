@@ -2,14 +2,20 @@ table
   thead
     tr
       th Name
-      th T_id
-      th Artist name
-      th colspan="3"
+      th Album
+      th img
+      th Artist
+      th Date
+      th Track_id
+      th Listen
   tbody
     - @tracks.each do |track|
       tr
         td = track.name
-        td = track.t_id
+        td = track.album_name
+        td style="background-image: url(#{track.album_img_url})"
         td = track.artist_name
-        td = link_to 'Show', track
-        td = link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' }
+        td = track.release_date.strftime("%y-%m-%d")
+        td = track.t_id
+        td
+          audio src="#{track.preview_url}" controls="controls"
