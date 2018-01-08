@@ -10,14 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180107114518) do
+ActiveRecord::Schema.define(version: 20180108014941) do
 
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",        null: false
-    t.string   "t_id",        null: false
+    t.string   "name",          null: false
+    t.string   "t_id",          null: false
     t.string   "artist_name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "album_name"
+    t.string   "album_id"
+    t.string   "album_img_url"
+    t.string   "preview_url"
+    t.integer  "track_number"
+    t.datetime "release_date"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
