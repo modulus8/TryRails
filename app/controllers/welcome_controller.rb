@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @tracks = Track.all.limit(10)
+    @tracks = Track.where("release_date >= ?", Time.now - 1.weeks).order(release_date: :desc)
   end
 end
