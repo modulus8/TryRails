@@ -7,7 +7,7 @@ namespace :main do
     @count = 0
     require "my_spotify"
     RSpotify.authenticate("64c53ef52397425abe86863d281d25fb", "8c91939166924e51a0ef100fa54a6d1f")
-    new_albums = RSpotify::Album.new_releases(limit:2, offset:0, country: "JP")
+    new_albums = RSpotify::Album.new_releases(limit:20, offset:0, country: "JP")
     new_albums.each do |album|
       tracks = album.tracks.flatten
       tracks.each do |track|
