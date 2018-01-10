@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   end
 
   resources :rspotify do
+    collection do
+      get :save_tracks
+    end
   end
   get '/auth/spotify/callback', to: 'rspotify#log_in'
   get '/log_out', to: 'rspotify#log_out'

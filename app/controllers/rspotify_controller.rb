@@ -18,5 +18,17 @@ class RspotifyController < ApplicationController
     redirect_to "/"
   end
 
+  def save_tracks
+    if @current_user.present?
+      ids = []
+      ids << params[:id].to_s
+      tracks = RSpotify::Base.find(ids, 'track')
+      spotify_user = RSpotify::User.new(@current_user.spo_hash)
+      spotify_user.save_tracks!(tracks)
+      redirect_to "/", notice: "保存しました。"
+    else
+      redirect_to "/", alert: "ログインしてください。"
+    end
+  end
 
 end
