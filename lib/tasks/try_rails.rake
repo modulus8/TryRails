@@ -11,25 +11,21 @@ namespace :main do
     new_albums.each do |album|
       tracks = album.tracks.flatten
       tracks.each do |track|
-        unless Track.find_by_t_id(track.id)
-          t = Track.new(
-              name: track.name,
-              t_id: track.id,
-              artist_name: track.artists.map{|artist| artist.name}.join(","),
-              preview_url: track.preview_url,
-              track_number: track.track_number,
-              album_name: album.name,
-              album_id: album.id,
-              album_img_url: album.images[-1]["url"],
-              release_date: album.release_date.length > 4 ? DateTime.parse(album.release_date) : DateTime.parse(album.release_date + "-01-01")
-          )
-          if t.save
-            p "saved #{track.name}"
-            @count += 1
-          else
-            p "error"
-            p t.errors
-          end
+        t = Track.find_or_create_by(t_id: track.id)
+              t.name = track.name
+              t.artist_name = track.artists.map{|artist| artist.name}.join(",")
+              t.preview_url = track.preview_url
+              t.track_number = track.track_number
+              t.album_name = album.name
+              t.album_id = album.id
+              t.album_img_url = album.images[-1]["url"]
+              t.release_date = album.release_date.length > 4 ? DateTime.parse(album.release_date) : DateTime.parse(album.release_date + "-01-01")
+        if t.save
+          p "saved #{track.name}"
+          @count += 1
+        else
+          p "error"
+          p t.errors
         end
       end
     end

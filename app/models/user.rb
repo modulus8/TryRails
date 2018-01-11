@@ -8,13 +8,22 @@ class User < ApplicationRecord
   serialize :spo_hash
 
   def self.find_or_create_from_auth(auth)
-    self.find_or_create_by(spo_id: auth["id"]) do |user|
-      user.name = auth["display_name"].present? ? auth["display_name"] : auth["id"]
-      user.email = auth["email"]
-      user.password = "spotify"
-      user.spo_hash = auth
-    end
+    user = self.find_or_create_by(spo_id: auth["id"])
+    user.name = auth["display_name"].present? ? auth["display_name"] : auth["id"]
+    user.email = auth["email"]
+    user.password = "spotify"
+    user.spo_hash = auth
+    user.img_url = auth["images"][-1]["url"]
+    user.save!
+    return user
   end
 
+  # def self.load_img
+  #   if self.img_url.present?
+  #     return self.img_url
+  #   else
+  #     return "/default_user_img.jpeg"
+  #   end
+  # end
 
 end
