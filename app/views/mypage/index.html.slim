@@ -1,0 +1,20 @@
+h1
+  = @current_user.name
+  | さんのマイページ
+
+h2
+  | 自動登録用プレイリスト
+p
+  - if @resigned_playlist.present?
+    = @resigned_playlist.name
+  - else
+    | まだ登録されていません。
+
+h2
+  | その他プレイリスト（20件）
+- @playlists.each do |playlist|
+  p
+    = playlist.name
+    | /
+    = playlist.id
+

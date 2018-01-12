@@ -19,7 +19,11 @@ Rails.application.routes.draw do
   get '/log_out', to: 'rspotify#log_out'
 
 
-  #admin
+  resources :mypage, :only => [:index] do
+  end
+
+
+  ##admin###############################################################################
   resources :admin, :only => [:index] do
   end
 
