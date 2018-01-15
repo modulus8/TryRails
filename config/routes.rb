@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
 
   resources :mypage, :only => [:index] do
+    post :register_playlist
   end
 
 
