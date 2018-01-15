@@ -5,16 +5,19 @@ h1
 h2
   | 自動登録用プレイリスト
 p
-  - if @resigned_playlist.present?
-    = @resigned_playlist.name
+  - if @registered_playlist.present?
+    span
+      | 現在設定中プレイリスト：
+    br
+    = @registered_playlist.name
   - else
     | まだ登録されていません。
 
-h2
-  | その他プレイリスト（20件）
-- @playlists.each do |playlist|
-  p
-    = playlist.name
-    | /
-    = playlist.id
-
+.form_wrapper
+  = form_tag(mypage_register_playlist_path(@current_user.id))
+    p
+      span
+        | Myプレイリスト（20件）
+      br
+      = select_tag :playlist_id, options_for_select(@playlists_hash)
+      = submit_tag "登録"
