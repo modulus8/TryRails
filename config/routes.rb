@@ -7,6 +7,12 @@ Rails.application.routes.draw do
       sessions: 'users/sessions'
   }
 
+  resources :welcome do
+    collection do
+      get :update_playlist
+    end
+  end
+
   resources :tracks do
   end
 

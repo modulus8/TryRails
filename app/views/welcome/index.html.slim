@@ -9,13 +9,30 @@ h1
       = @current_user.name
     | さん
 
+  - if @current_user.playlist_id.present?
+    .form_wrapper
+      = form_tag(update_playlist_welcome_index_path, method: "get")
+        span
+          | 登録済みプレイリストを更新
+        = submit_tag "更新"
+  - else
+    a href="/mypage"
+      | マイページ
+    span
+      | からプレイリストを設定して下さい。
+
+
+
 - else
   p
     | こんにちは、
     strong ログイン
     | してください
 
+- cache "top_track_list", expires_in: 3.hours, skip_digest: true
+  h2
+    | Tracks released for 1 week.
+  = render "shared/tracks_list"
 
-h2
-  | Tracks released for 1 week.
-= render "shared/tracks_list"
+
+

@@ -1,3 +1,4 @@
+- tracks = Track.where("release_date >= ?", Time.now - 1.weeks).order(release_date: :desc)
 table
   thead
     tr
@@ -10,15 +11,14 @@ table
         th Save
       th Listen
   tbody
-    - @tracks.each do |track|
+    - tracks.each do |track|
       tr
         td = track.name
         td = track.album_name
         td style="background-image: url(#{track.album_img_url})"
         td = track.artist_name
         td = track.release_date.strftime("%y-%m-%d")
-        - if @current_user.present?
-          td
-            = link_to "保存", "/rspotify/save_tracks?id=#{track.t_id}"
+        td
+          = link_to "保存", "/rspotify/save_tracks?id=#{track.t_id}"
         td
           audio src="#{track.preview_url}" controls="controls"
