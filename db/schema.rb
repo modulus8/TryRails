@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116035237) do
+ActiveRecord::Schema.define(version: 20180116063458) do
 
   create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "priority",                 default: 0, null: false
@@ -25,6 +25,23 @@ ActiveRecord::Schema.define(version: 20180116035237) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+  end
+
+  create_table "playlist_properties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",                     null: false
+    t.string   "style",                       null: false
+    t.string   "updown",                      null: false
+    t.integer  "key"
+    t.float    "danceability",     limit: 24
+    t.float    "energy",           limit: 24
+    t.float    "speechiness",      limit: 24
+    t.float    "acousticness",     limit: 24
+    t.float    "instrumentalness", limit: 24
+    t.float    "liveness",         limit: 24
+    t.float    "valence",          limit: 24
+    t.integer  "duration_ms"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "track_analyzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
