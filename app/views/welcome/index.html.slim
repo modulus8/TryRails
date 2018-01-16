@@ -29,10 +29,30 @@ h1
     strong ログイン
     | してください
 
-- cache "top_track_list", expires_in: 3.hours, skip_digest: true
-  h2
-    | Tracks released for 1 week.
-  = render "shared/tracks_list"
-
-
-
+/- cache "top_track_list", expires_in: 3.hours, skip_digest: true
+h2
+  | Tracks released for 1 week.
+table
+  thead
+    tr
+      th Name
+      th Album
+      th img
+      th Artist
+      th Date
+      - if @current_user.present?
+        th Save
+      th Listen
+  tbody
+    - @tracks.each do |track|
+      tr
+        td = track.name
+        td = track.album_name
+        td style="background-image: url(#{track.album_img_url})"
+        td = track.artist_name
+        td = track.release_date.strftime("%y-%m-%d")
+        - if @current_user.present?
+          td
+            = link_to "保存", "/rspotify/save_tracks?id=#{track.t_id}"
+        td
+          audio src="#{track.preview_url}" controls="controls"
