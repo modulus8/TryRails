@@ -14,7 +14,7 @@
         <a href="/">TOP</a>
         <% if user_signed_in? %>
           <%= link_to 'ログアウト', '/log_out' %>
-          <a href="/mypage"><div class="user_icon" style="background-image: url('<%= @current_user.img_url %>')"></div></a>
+          <a href="/mypage"><div class="user_icon" style="background-image: url('<%= @current_user.load_img %>')"></div></a>
         <% else %>
           <%= link_to 'Spotifyでログイン', '/auth/spotify'%>
         <% end %>

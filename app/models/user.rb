@@ -16,15 +16,23 @@ class User < ApplicationRecord
     user.spo_hash = auth
     user.img_url = auth["images"][-1]["url"]
     user.save!
+    if user.playlist_properties.blank?
+      user.playlist_properties = PlaylistProperty.new(
+        user_id: user.id,
+        style: "and",
+        updown: "up"
+      )
+      user.save!
+    end
     return user
   end
 
-  # def self.load_img
-  #   if self.img_url.present?
-  #     return self.img_url
-  #   else
-  #     return "/default_user_img.jpeg"
-  #   end
-  # end
+  def load_img
+    if self.img_url.present?
+      return self.img_url
+    else
+      return "/default_user_img.jpeg"
+    end
+  end
 
 end
