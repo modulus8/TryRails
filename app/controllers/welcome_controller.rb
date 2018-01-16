@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   def index
+    @tracks = Track.where("release_date >= ?", Time.now - 1.weeks).order("RAND()").limit(6)
   end
 
   def update_playlist
