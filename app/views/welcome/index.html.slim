@@ -9,12 +9,12 @@ h1
       = @current_user.name
     | さん
 
-  - if @current_user.playlist_id.present?
+  - if @current_user.playlist_id.present? && @current_user.playlist_properties.present?
     .form_wrapper
       = form_tag(update_playlist_welcome_index_path, method: "get")
         span
           | 登録済みプレイリストを更新
-        = submit_tag "更新"
+        = submit_tag "○"
   - else
     a href="/mypage"
       | マイページ

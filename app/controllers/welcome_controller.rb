@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   end
 
   def update_playlist
-    if @current_user.blank? || @current_user.playlist_id.blank?
+    if @current_user.blank? || @current_user.playlist_id.blank? || @current_user.playlist_properties.blank?
       redirect_to "/"
       return
     else
