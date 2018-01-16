@@ -17,7 +17,58 @@ p
   = form_tag(mypage_register_playlist_path(@current_user.id))
     p
       span
-        | Myプレイリスト（20件）
+        | Your Spotify Playlist（20件）
       br
       = select_tag :playlist_id, options_for_select(@playlists_hash)
       = submit_tag "登録"
+
+
+h2
+  | 自動作成するトラックの条件設定
+.form_wrapper
+  = form_tag(mypage_register_playlist_path(@current_user.id))
+    = select_tag :playlist_id, options_for_select([["OR", "or"],["AND", "and"]])
+    = select_tag :playlist_id, options_for_select([["DOWN", "down"],["UP", "up"]])
+    .number_field
+      span
+        | アコースティック
+      = check_box_tag "acc[:is]"
+      = number_field_tag "acc[:num]", "", min: "0", max: "1", step: "0.1"
+    .number_field
+      span
+        | アコースティック
+      = check_box_tag "acc[:is]"
+      = number_field_tag "acc[:num]", "", min: "0", max: "1", step: "0.1"
+    .number_field
+      span
+        | アコースティック
+      = check_box_tag "acc[:is]"
+      = number_field_tag "acc[:num]", "", min: "0", max: "1", step: "0.1"
+    .number_field
+      span
+        | アコースティック
+      = check_box_tag "acc[:is]"
+      = number_field_tag "acc[:num]", "", min: "0", max: "1", step: "0.1"
+    .number_field
+      span
+        | アコースティック
+      = check_box_tag "acc[:is]"
+      = number_field_tag "acc[:num]", "", min: "0", max: "1", step: "0.1"
+    .number_field
+      span
+        | アコースティック
+      = check_box_tag "acc[:is]"
+      = number_field_tag "acc[:num]", "", min: "0", max: "1", step: "0.1"
+    .number_field
+      span
+        | アコースティック
+      = check_box_tag "acc[:is]"
+      = number_field_tag "acc[:num]", "", min: "0", max: "1", step: "0.1"
+    .number_field
+      span
+        | アコースティック
+      = check_box_tag "acc[:is]"
+      = number_field_tag "acc[:num]", "", min: "0", max: "1", step: "0.1"
+    p
+      = submit_tag "設定"
+
