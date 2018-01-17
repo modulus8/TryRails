@@ -6,9 +6,8 @@ h2
   | 自動登録用プレイリスト
 p
   - if @registered_playlist.present?
-    span
+    strong
       | 現在設定中プレイリスト：
-    br
     = @registered_playlist.name
   - else
     | まだ登録されていません。
@@ -22,12 +21,22 @@ p
       = select_tag :playlist_id, options_for_select(@playlists_hash)
       = submit_tag "登録"
 
+h2
+  | 新規プレイリストの作成
+  = form_tag( mypage_create_playlist_path(@current_user.id))
+    p
+      span
+        | プレイリスト名
+      br
+      = text_field_tag :playlist_name, "", maxlength: 30, required: true, placeholder: "入力して下さい。"
+      = submit_tag "作成"
+
 
 h2
   | 自動作成するトラックの条件設定
 .form_wrapper
   = form_tag(mypage_register_playlist_path(@current_user.id))
-    = select_tag :playlist_id, options_for_select([["OR", "or"],["AND", "and"]])
+    = select_tag :playlist_id, options_for_select([["AND", "and"],["OR", "or"]])
     = select_tag :playlist_id, options_for_select([["DOWN", "down"],["UP", "up"]])
     .number_field
       span

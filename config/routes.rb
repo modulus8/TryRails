@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :mypage, :only => [:index] do
     post :register_playlist
+    post :create_playlist
   end
 
 
