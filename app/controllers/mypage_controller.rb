@@ -19,6 +19,16 @@ class MypageController < ApplicationController
     end
   end
 
+  def create_playlist
+    if params[:playlist_name].present?
+      spotify_user = RSpotify::User.new(@current_user.spo_hash)
+      playlist = spotify_user.create_playlist!(params[:playlist_name].to_s, public: true)
+      @current_user.playlist_id = playlist.id
+      @current_user.save!
+      redirect_to :action => "index"
+    end
+  end
+
   private
     def check_current_user
       if @current_user.blank?
