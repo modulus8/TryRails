@@ -29,6 +29,44 @@ class MypageController < ApplicationController
     end
   end
 
+  def update_property
+    property = @current_user.playlist_properties.first
+    property.style = params[:style]
+    property.updown = params[:updown]
+    if params[:instrumentalness][:is].present? && params[:instrumentalness][:num].present?
+      property.instrumentalness = params[:instrumentalness][:num].to_f
+    end
+
+    if params[:liveness][:is].present? && params[:liveness][:num].present?
+      property.liveness = params[:liveness][:num].to_f
+    end
+
+    if params[:acousticness][:is].present? && params[:acousticness][:num].present?
+      property.acousticness = params[:acousticness][:num].to_f
+    end
+
+    if params[:danceability][:is].present? && params[:danceability][:num].present?
+      property.danceability = params[:danceability][:num].to_f
+    end
+
+    if params[:danceability][:is].present? && params[:danceability][:num].present?
+      property.danceability = params[:danceability][:num].to_f
+    end
+
+    if params[:energy][:is].present? && params[:energy][:num].present?
+      property.energy = params[:energy][:num].to_f
+    end
+
+    if params[:valence][:is].present? && params[:valence][:num].present?
+      property.valence = params[:valence][:num].to_f
+    end
+
+    if property.save
+      redirect_to :action => "index"
+    end
+
+  end
+
   private
     def check_current_user
       if @current_user.blank?
