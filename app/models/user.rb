@@ -17,7 +17,7 @@ class User < ApplicationRecord
     user.img_url = auth["images"][-1]["url"]
     user.save!
     if user.playlist_properties.blank?
-      user.playlist_properties = PlaylistProperty.new(
+      user.playlist_properties.new(
         user_id: user.id,
         style: "and",
         updown: "up"
