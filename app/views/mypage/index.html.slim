@@ -36,37 +36,38 @@ h2
   | 自動作成するトラックの条件設定
 .form_wrapper
   = form_tag(mypage_update_property_path(@current_user.id))
-    = select_tag :style, options_for_select([["AND", "and"],["OR", "or"]])
-    = select_tag :updown, options_for_select([["DOWN", "down"],["UP", "up"]])
+    - property = @current_user.playlist_properties.first
+    = select_tag :style, options_for_select([["AND", "and"],["OR", "or"]], selected: property.style)
+    = select_tag :updown, options_for_select([["DOWN", "down"],["UP", "up"]], selected: property.updown)
     .number_field
       span
         | BGM曲の割合(0.2以下でなし)
-      = check_box_tag "instrumentalness[is]"
-      = number_field_tag "instrumentalness[num]", "", min: "0", max: "1", step: "0.1"
+      = check_box_tag "instrumentalness[is]", "1", checked = property.instrumentalness.present?
+      = number_field_tag "instrumentalness[num]", property.instrumentalness, min: "0", max: "1", step: "0.1"
     .number_field
       span
         | ライブ曲の割合(0.2以下でなし)
-      = check_box_tag "liveness[is]"
-      = number_field_tag "liveness[num]", "", min: "0", max: "1", step: "0.1"
+      = check_box_tag "liveness[is]", "1", checked = property.liveness.present?
+      = number_field_tag "liveness[num]", property.liveness, min: "0", max: "1", step: "0.1"
     .number_field
       span
         | 生楽器使用曲の割合
-      = check_box_tag "acousticness[is]"
-      = number_field_tag "acousticness[num]", "", min: "0", max: "1", step: "0.1"
+      = check_box_tag "acousticness[is]", "1", checked = property.acousticness.present?
+      = number_field_tag "acousticness[num]", property.acousticness, min: "0", max: "1", step: "0.1"
     .number_field
       span
         | ダンス曲の割合
-      = check_box_tag "danceability[is]"
-      = number_field_tag "danceability[num]", "", min: "0", max: "1", step: "0.1"
+      = check_box_tag "danceability[is]", "1", checked = property.danceability.present?
+      = number_field_tag "danceability[num]", property.danceability, min: "0", max: "1", step: "0.1"
     .number_field
       span
         | 激しい曲の割合
-      = check_box_tag "energy[is]"
-      = number_field_tag "energy[num]", "", min: "0", max: "1", step: "0.1"
+      = check_box_tag "energy[is]", "1", checked = property.energy.present?
+      = number_field_tag "energy[num]", property.energy, min: "0", max: "1", step: "0.1"
     .number_field
       span
         | 曲の明るさ(0.5基準。0.5以上で明るい曲。)
-      = check_box_tag "valence[is]"
-      = number_field_tag "valence[num]", "", min: "0", max: "1", step: "0.1"
+      = check_box_tag "valence[is]", "1", checked = property.valence.present?
+      = number_field_tag "valence[num]", property.valence, min: "0", max: "1", step: "0.1"
     = submit_tag "設定"
 
