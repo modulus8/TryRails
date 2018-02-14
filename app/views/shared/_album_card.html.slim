@@ -1,0 +1,9 @@
+- @tracks.each do |track|
+  .card.w-50.d-inline-block
+    img.card-img src="#{track.album_img_url}"
+    .card-img-overlay.bg-dark
+      .w-100 style="background: rgba(45,45,45, 0.2)"
+        p.card-text.text-white
+          = track.name
+          = track.release_date.strftime("%y-%m-%d")
+          = track.artist_name
