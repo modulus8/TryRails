@@ -1,27 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Payermusic</title>
+    <title>One Week Tracks</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
   </head>
 
   <body>
-    <header>
-      <nav>
-        <a href="/">TOP</a>
-        <% if user_signed_in? %>
-          <%= link_to 'ログアウト', '/log_out' %>
-          <a href="/mypage"><div class="user_icon" style="background-image: url('<%= @current_user.load_img %>')"></div></a>
-        <% else %>
-          <%= link_to 'Spotifyでログイン', '/auth/spotify'%>
-        <% end %>
+    <header class="mx-auto my-0">
+      <div class="notice d-none bg-success text-white"><%= notice %></div>
+      <div class="alert d-none bg-danger text-white"><%= alert %></div>
+      <nav class="navbar navbar-expand-lg bg-main p-0 m-0">
+        <ul class="nav nav-pills w-100 clearfix">
+          <li class="nav-item float-left w-75">
+            <h1 class="font-italic font-weight-bold p-2 m-0 h5"><a class="navbar-brand text-main" href="/">One Week Tracks</a></h1>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown float-right w-25">
+              <a class="nav-link dropdown-toggle p-2 float-right" data-toggle="dropdown" href="#!" role="button" aria-haspopup="true" aria-expanded="false">
+                <div class="user_icon" style="background-image: url('<%= @current_user.load_img %>')"></div>
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/mypage">マイページ</a>
+                <a class="dropdown-item" href="/log_out">ログアウト</a>
+              </div>
+            </li>
+          <% else %>
+            <li class="nav-item float-right w-25">
+              <p><a class="" href="/auth/spotify">Spotifyでログイン</a></p>
+            </li>
+          <% end %>
+        </ul>
       </nav>
     </header>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+    <footer class="bg-main">
+      <p class="p-2 m-0 text-main">
+        <small>このサイトの製作者：</small>
+        Twitter
+        Email
+      </p>
+    </footer>
   </body>
 </html>

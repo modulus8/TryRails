@@ -7,10 +7,23 @@ a{
 
 .user_icon{
   display: inline-block;
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 5px 10px 5px 10px;
+}
+
+.bg-img-cotain{
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.bg-main{
+  background: #88f7b299;
+}
+
+.text-main{
+  color: #004c98;
 }
