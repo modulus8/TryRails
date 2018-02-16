@@ -6,13 +6,13 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta charset="UTF-8">
+    <meta name="keyword" content="spotify,プレイリスト,自動作成,最新曲,">
+    <meta name="description" content="spotifyを利用して、最新曲から好みのプレイリストを自動で作成するサイトです。">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
   </head>
 
   <body>
     <header class="mx-auto my-0">
-      <div class="notice d-none bg-success text-white"><%= notice %></div>
-      <div class="alert d-none bg-danger text-white"><%= alert %></div>
       <nav class="navbar navbar-expand-lg bg-main p-0 m-0">
         <ul class="nav nav-pills w-100 clearfix">
           <li class="nav-item float-left w-75">
@@ -23,7 +23,7 @@
               <a class="nav-link dropdown-toggle p-2 float-right" data-toggle="dropdown" href="#!" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="user_icon" style="background-image: url('<%= @current_user.load_img %>')"></div>
               </a>
-              <div class="dropdown-menu">
+              <div class="dropdown-menu dropdown-menu-left">
                 <a class="dropdown-item" href="/mypage">マイページ</a>
                 <a class="dropdown-item" href="/log_out">ログアウト</a>
               </div>
@@ -35,6 +35,8 @@
           <% end %>
         </ul>
       </nav>
+      <div class="notice d-none bg-success text-white"><%= notice %></div>
+      <div class="alert d-none bg-danger text-white"><%= alert %></div>
     </header>
     <main>
       <%= yield %>
@@ -43,7 +45,6 @@
       <p class="p-2 m-0 text-main">
         <small>このサイトの製作者：</small>
         Twitter
-        Email
       </p>
     </footer>
   </body>

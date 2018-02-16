@@ -15,7 +15,7 @@
 
   .row.py-2
     .col
-      - if @current_user.playlist_id.present? && @current_user.playlist_properties.present?
+      - if @current_user.present? && @current_user.playlist_id.present? && @current_user.playlist_properties.present?
         .form_wrapper
           = form_tag(update_playlist_welcome_index_path, method: "get")
             p.p-2.m-0
