@@ -15,7 +15,7 @@
 
   .row.py-2
     .col
-      - if @current_user.playlist_id.present? && @current_user.playlist_properties.present?
+      - if @current_user.present? && @current_user.playlist.present? && @current_user.playlist_properties.present?
         .form_wrapper
           = form_tag(update_playlist_welcome_index_path, method: "get")
             p.p-2.m-0
@@ -23,11 +23,17 @@
             div
               = submit_tag "◎", style: "color: #F00; border: 2px solid #F00;"
 
+      - elsif @current_user.present?
+        .p-1
+          a href="/mypage"
+            | マイページ
+          | からプレイリストを
+          br 設定して下さい。
       - else
-        a href="/mypage"
-          | マイページ
-        span
-          | からプレイリストを設定して下さい。
+        .p-1
+          a href="/auth/spotify"
+            | ログイン
+          | してサイトをご利用下さい。
 
   .row.my-4
     .col
@@ -37,38 +43,65 @@
             | How About This Site
           h6.card-subtitle.mb-2.text-muted.text-secondary
             | -このサイトについて-
-          p.card-text
-            | 音楽配信サイトの一つである
-            br Spotifyを利用し、最新の音楽を
-            | 発掘するためのサイト。
+          p.card-text.text-left
+            | 　音楽配信サイトの一つであるSpotifyを
+            | 使って最新の音楽を発掘します。最新の曲の中から
+            | 好みのタイプを選び、プレイリストを自動で作成します。
+            | またボタンを押すたびに最新曲のプレイリストに更新されます。
 
 
   /- cache "top_track_list", expires_in: 3.hours, skip_digest: true
   section
-    = render partial: "shared/album_card", tracks: @tracks
     h2.text-left.h5
       | Latest Track -最新トラック-
-    table.table
-      thead
-        tr
-          th Name
-          th Album
-          th Image
-          th Artist
-          th Date
-          - if @current_user.present?
-            th Save
-          th Listen(30sec)
-      tbody
-        - @tracks.each do |track|
-          tr
-            td = track.name
-            td = track.album_name
-            td.bg-img-cotain style="background-image: url(#{track.album_img_url})"
-            td = track.artist_name
-            td = track.release_date.strftime("%y-%m-%d")
-            - if @current_user.present?
-              td
-                = link_to "保存", "/rspotify/save_tracks?id=#{track.t_id}"
-            td
-              audio src="#{track.preview_url}" controls="controls"
+    = render partial: "shared/album_card", tracks: @tracks
+
+
+  .row.my-4
+    .col
+      .card
+        .card-body
+          h4.card-title.text-info
+            | How To Use
+          h6.card-subtitle.mb-2.text-muted.text-secondary
+            | -ご利用方法-
+          .card-text.text-left
+            ul
+              li
+                a href="https://www.spotify.com/jp/" rel="nofollow" target="_blank"
+                  | Spotify
+                | に登録します。
+              li
+                | このサイトにログインします。
+              li
+                | マイページに移動します。
+              li
+                | プレイリストの設定をします。
+              li
+                | トップにあるボタンを押します。
+
+
+    / table.table
+    /   thead
+    /     tr
+    /       th Name
+    /       th Album
+    /       th Image
+    /       th Artist
+    /       th Date
+    /       - if @current_user.present?
+    /         th Save
+    /       th Listen(30sec)
+    /   tbody
+    /     - @tracks.each do |track|
+    /       tr
+    /         td = track.name
+    /         td = track.album_name
+    /         td.bg-img-cotain style="background-image: url(#{track.album_img_url})"
+    /         td = track.artist_name
+    /         td = track.release_date.strftime("%y-%m-%d")
+    /         - if @current_user.present?
+    /           td
+    /             = link_to "保存", "/rspotify/save_tracks?id=#{track.t_id}"
+    /         td
+    /           audio src="#{track.preview_url}" controls="controls"
