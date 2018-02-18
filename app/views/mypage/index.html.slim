@@ -1,100 +1,104 @@
 .container
   .row
-    span.p-2
-      = @current_user.name
-      | さんのマイページ
+    .col
+      p.mt-2
+        = @current_user.name
+        | さんのマイページ
   .row.mb-3
-    .card.border-info
-      .card-body
-        h4.card-title.bg-info.text-white.p-2.rounded-top
-          | 自動作成用プレイリスト
-        h6.card-subtitle.mb-2.text-muted
-        - if @registered_playlist.present?
-          span
-            | 現在設定中プレイリスト：
-          br
-          strong
-            = @registered_playlist.name
-        - else
-          | まだ登録されていません。
-        .card-text.p-2
-          .form_wrapper
-            = form_tag(mypage_register_playlist_path(@current_user.id))
-              p
-                span
-                  | Your Spotify Playlist（20件）
-                br
-                  = select_tag :playlist_id, options_for_select(@playlists_hash)
-                  = submit_tag "登録", class: "btn btn-info p-2 m-2"
+    .col
+      .card.border-info
+        .card-body
+          h4.card-title.bg-info.text-white.p-2.rounded-top
+            | 自動作成用プレイリスト
+          h6.card-subtitle.mb-2.text-muted
+          - if @registered_playlist.present?
+            span
+              | 現在設定中プレイリスト：
+            br
+            strong
+              = @registered_playlist.name
+          - else
+            | まだ登録されていません。
+          .card-text.p-2
+            .form_wrapper
+              = form_tag(mypage_register_playlist_path(@current_user.id))
+                p
+                  span
+                    | Your Spotify Playlist（20件）
+                  br
+                    = select_tag :playlist_id, options_for_select(@playlists_hash), class: "border border-dark pb-1"
+                    = submit_tag "登録", class: "btn btn-info p-2 m-2"
 
   .row.mb-3
-    .card.border-success
-      .card-body
-        h4.card-title.bg-success.text-white.p-2.rounded-top
-          | 新規プレイリストの作成
-        .card-text.p-2
-          .form_wrapper
-            = form_tag( mypage_create_playlist_path(@current_user.id))
-              p
-                span
-                  | プレイリスト名
-                br
-                = text_field_tag :playlist_name, "", maxlength: 30, required: true, placeholder: "入力して下さい。"
-                = submit_tag "作成", class: "btn btn-success p-2 m-2"
+    .col
+      .card.border-success
+        .card-body
+          h4.card-title.bg-success.text-white.p-2.rounded-top
+            | 新規プレイリストの作成
+          .card-text.p-2
+            .form_wrapper
+              = form_tag( mypage_create_playlist_path(@current_user.id))
+                p
+                  span
+                    | プレイリスト名
+                  br
+                  = text_field_tag :playlist_name, "", maxlength: 30, required: true, placeholder: "入力して下さい。", class: "border border-dark p-1"
+                  = submit_tag "作成", class: "btn btn-success p-2 m-2"
 
   .row.mb-3
-    .card.border-danger
-      .card-body
-        h4.card-title.bg-danger.text-white.p-2.rounded-top
-          | 自動作成するトラックの条件設定
-        .card-text.p-2
-          .form_wrapper
-            = form_tag(mypage_update_property_path(@current_user.id))
-              .p-2
-                - property = @current_user.playlist_properties.first
-                = select_tag :style, options_for_select([["AND", "and"], ["OR", "or"]], selected: property.style)
-                = select_tag :updown, options_for_select([["DOWN", "down"], ["UP", "up"]], selected: property.updown)
-              .border.border-danger.rounded.mb-1
-                .custom-control.custom-checkbox.m-2
-                  = check_box_tag "instrumentalness[is]", "1", checked = property.instrumentalness.present?, id: "customCheck1", class: "custom-control-input"
-                  label.custom-control-label for="customCheck1"
-                    | BGM曲の割合(0.2以下でなし)
-                  .m-1
-                    = number_field_tag "instrumentalness[num]", property.instrumentalness, min: "0", max: "1", step: "0.1"
-              .border.border-danger.rounded.mb-1
-                .custom-control.custom-checkbox.m-2
-                  = check_box_tag "liveness[is]", "1", checked = property.liveness.present?, id: "customCheck2", class: "custom-control-input"
-                  label.custom-control-label for="customCheck2"
-                    | ライブ曲の割合(0.2以下でなし)
-                  .m-1
-                    = number_field_tag "liveness[num]", property.liveness, min: "0", max: "1", step: "0.1"
-              .border.border-danger.rounded.mb-1
-                .custom-control.custom-checkbox.m-2
-                  = check_box_tag "acousticness[is]", "1", checked = property.acousticness.present?, id: "customCheck3", class: "custom-control-input"
-                  label.custom-control-label for="customCheck3"
-                    | 生楽器使用曲の割合
-                  .m-1
-                    = number_field_tag "acousticness[num]", property.acousticness, min: "0", max: "1", step: "0.1"
-              .border.border-danger.rounded.mb-1
-                .custom-control.custom-checkbox.m-2
-                  = check_box_tag "danceability[is]", "1", checked = property.danceability.present?, id: "customCheck4", class: "custom-control-input"
-                  label.custom-control-label for="customCheck4"
-                    | ダンス曲の割合
-                  .m-1
-                    = number_field_tag "danceability[num]", property.danceability, min: "0", max: "1", step: "0.1"
-              .border.border-danger.rounded.mb-1
-                .custom-control.custom-checkbox.m-2
-                  = check_box_tag "energy[is]", "1", checked = property.energy.present?, id: "customCheck5", class: "custom-control-input"
-                  label.custom-control-label for="customCheck5"
-                    | 激しい曲の割合
-                  .m-1
-                    = number_field_tag "energy[num]", property.energy, min: "0", max: "1", step: "0.1"
-              .border.border-danger.rounded.mb-1
-                .custom-control.custom-checkbox.m-2
-                  = check_box_tag "valence[is]", "1", checked = property.valence.present?, id: "customCheck6", class: "custom-control-input"
-                  label.custom-control-label for="customCheck6"
-                    | 曲の明るさ(0.5基準。0.5以上で明るい曲。)
-                  .m-1
-                    = number_field_tag "valence[num]", property.valence, min: "0", max: "1", step: "0.1"
-              .p-0.m-0
-                = submit_tag "設定", class: "btn btn-danger p-2 m-2"
+    .col
+      .card.border-danger
+        .card-body
+          h4.card-title.bg-danger.text-white.p-2.rounded-top
+            | 自動作成するトラックの条件設定
+          .card-text.p-2
+            .form_wrapper
+              = form_tag(mypage_update_property_path(@current_user.id))
+                .p-2
+                  - property = @current_user.playlist_properties.first
+                  = select_tag :style, options_for_select([["AND", "and"], ["OR", "or"]], selected: property.style), class: "custom-select"
+                  = select_tag :updown, options_for_select([["DOWN", "down"], ["UP", "up"]], selected: property.updown), class: "custom-select"
+                .border.border-danger.rounded.mb-1
+                  .custom-control.custom-checkbox.m-2
+                    = check_box_tag "instrumentalness[is]", "1", checked = property.instrumentalness.present?, id: "customCheck1", class: "custom-control-input"
+                    label.custom-control-label for="customCheck1"
+                      | BGM曲の割合(0.2以下でなし)
+                    .m-1
+                      = number_field_tag "instrumentalness[num]", property.instrumentalness, min: "0", max: "1", step: "0.1"
+                .border.border-danger.rounded.mb-1
+                  .custom-control.custom-checkbox.m-2
+                    = check_box_tag "liveness[is]", "1", checked = property.liveness.present?, id: "customCheck2", class: "custom-control-input"
+                    label.custom-control-label for="customCheck2"
+                      | ライブ曲の割合(0.2以下でなし)
+                    .m-1
+                      = number_field_tag "liveness[num]", property.liveness, min: "0", max: "1", step: "0.1"
+                .border.border-danger.rounded.mb-1
+                  .custom-control.custom-checkbox.m-2
+                    = check_box_tag "acousticness[is]", "1", checked = property.acousticness.present?, id: "customCheck3", class: "custom-control-input"
+                    label.custom-control-label for="customCheck3"
+                      | 生楽器使用曲の割合
+                    .m-1
+                      = number_field_tag "acousticness[num]", property.acousticness, min: "0", max: "1", step: "0.1"
+                .border.border-danger.rounded.mb-1
+                  .custom-control.custom-checkbox.m-2
+                    = check_box_tag "danceability[is]", "1", checked = property.danceability.present?, id: "customCheck4", class: "custom-control-input"
+                    label.custom-control-label for="customCheck4"
+                      | ダンス曲の割合
+                    .m-1
+                      = number_field_tag "danceability[num]", property.danceability, min: "0", max: "1", step: "0.1"
+                .border.border-danger.rounded.mb-1
+                  .custom-control.custom-checkbox.m-2
+                    = check_box_tag "energy[is]", "1", checked = property.energy.present?, id: "customCheck5", class: "custom-control-input"
+                    label.custom-control-label for="customCheck5"
+                      | 激しい曲の割合
+                    .m-1
+                      = number_field_tag "energy[num]", property.energy, min: "0", max: "1", step: "0.1"
+                .border.border-danger.rounded.mb-1
+                  .custom-control.custom-checkbox.m-2
+                    = check_box_tag "valence[is]", "1", checked = property.valence.present?, id: "customCheck6", class: "custom-control-input"
+                    label.custom-control-label for="customCheck6"
+                      | 曲の明るさ(0.5基準。0.5以上で明るい曲。)
+                    .m-1
+                      = number_field_tag "valence[num]", property.valence, min: "0", max: "1", step: "0.1"
+                .p-0.m-0
+                  = submit_tag "設定", class: "btn btn-danger p-2 m-2"

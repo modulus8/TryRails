@@ -1,0 +1,6 @@
+.alert.fixed-bottom.w-100.m-0.rounded-0.alert-dismissible.box-shadow-bottom.bg-white
+  button.rounded.bg-white.p-2.close data-dismiss="alert"
+    | ×
+  iframe src="https://open.spotify.com/embed?theme=white&view=coverart&uri=spotify%3Aalbum%3A2rp5riHULWgrXPsDtsp1ir" width="300" height="80" frameborder="0" allowtransparency="true"
+  p.m-0
+    = link_to "保存", "/rspotify/save_tracks?id=track.t_id", class: "btn btn-info"
