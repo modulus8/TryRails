@@ -20,10 +20,22 @@ a{
   background-size: contain;
 }
 
-.bg-main{
-  background: #88f7b299;
+.bg-main{background: #f7e4e4;}
+
+.box-shadow-top{
+  box-shadow: 3px 5px 10px #b5a5a5;
+  -webkit-box-shadow: 3px 5px 10px #b5a5a5;
+  -moz-box-shadow: 3px 5px 10px #b5a5a5;
 }
 
-.text-main{
-  color: #004c98;
+.box-shadow-bottom{
+  box-shadow: 3px -1px 10px #b5a5a5;
+  -webkit-box-shadow: 3px -1px 10px #b5a5a5;
+  -moz-box-shadow: 3px -1px 10px #b5a5a5;
 }
+
+.text-main{color: #c75959;}
+
+.text-main-shadow{text-shadow: 2px 3px 5px #b5a5a5;}
+
+.main-top-pad{padding-top: 60px;}
