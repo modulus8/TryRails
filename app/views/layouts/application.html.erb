@@ -13,6 +13,11 @@
 
   <body>
     <header class="mx-auto my-0 fixed-top box-shadow-top">
+      <%- flash.each do |key, value|%>
+          <%- key = "info" if key == "notice"%>
+          <%- key = "danger"  if key == "alert"%>
+          <%= content_tag :div, value, class: "alert-#{key} m-0 p-0 rounded-0 text-center", id: "alert-out"%>
+      <%- end%>
       <nav class="navbar navbar-expand-lg bg-main p-0 m-0">
         <ul class="nav nav-pills w-100 clearfix">
           <li class="nav-item float-left w-75">
@@ -33,8 +38,6 @@
           <% end %>
         </ul>
       </nav>
-      <div class="notice d-none bg-success text-white"><%= notice %></div>
-      <div class="alert d-none bg-danger text-white"><%= alert %></div>
     </header>
     <main class="main-top-pad">
       <%= yield %>
@@ -42,7 +45,7 @@
     <footer class="bg-main box-shadow-bottom clearfix">
       <p class="p-2 m-0 text-main float-left w-70">
         <small>このサイトの製作者：</small>
-        <a href="#">Twitter</a>
+        <a href="https://twitter.com/comuptify" rel="nofollow" target="_blank">Twitter</a>
       </p>
       <p class="p-2 m-0 float-right w-30">
         <a href="/log_out">ログアウト</a>
