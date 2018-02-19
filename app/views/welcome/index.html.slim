@@ -54,7 +54,7 @@
   section
     h2.text-left.h5
       | Latest Track -最新トラック-
-    = render partial: "shared/album_card", tracks: @tracks
+    = render partial: "shared/album_card", locals: { tracks: @tracks}
 
 
   .row.my-4
@@ -106,5 +106,20 @@
     /         td
     /           audio src="#{track.preview_url}" controls="controls"
 
-.control-box
-  = render "shared/control_box"
+#control-box
+
+javascript:
+  //#control-boxの表示
+  $(function(){
+     $("section").on("click", ".click_track_js", function(){
+         var id = $(this).attr("data-tid");
+         var play_url = "https://open.spotify.com/embed?theme=white&view=coverart&uri=spotify%3Atrack%3A";
+         var fav_url = "/rspotify/save_tracks?id=";
+         console.log(id);
+         $("#control-box").html("#{escape_javascript(render 'shared/control_box')}");
+         $("#control-box").find("iframe").attr("src", play_url + id);
+         $("#control-box").find("a").attr("href", fav_url + id);
+     })
+  });
+
+
