@@ -17,5 +17,5 @@ module Payermusic
 end
 
 #spotify
-#RSpotify::authenticate("64c53ef52397425abe86863d281d25fb", "8c91939166924e51a0ef100fa54a6d1f")
+RSpotify::authenticate("64c53ef52397425abe86863d281d25fb", "8c91939166924e51a0ef100fa54a6d1f")
 
