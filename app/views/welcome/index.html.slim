@@ -20,9 +20,9 @@
           = form_tag(update_playlist_welcome_index_path, method: "get")
             p.p-2.m-0
               | 登録済みプレイリストを更新
-            div
-              = submit_tag "◎", style: "color: #F00; border: 2px solid #F00;"
-
+            div.p-2
+              button.btn.btn-danger.p-2.rounded.click_track_js type="submit"
+                i.fa.fa-dot-circle.fa-3x
       - elsif @current_user.present?
         .p-1
           a href="/mypage"

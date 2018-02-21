@@ -15,6 +15,7 @@ gem 'puma', '~> 3.0'
 
 #bootstrap
 gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'font-awesome-sass' #アイコンのために
 gem 'jquery-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -84,19 +85,19 @@ gem 'slim'
 # action_cache
 gem 'actionpack-action_caching', '~> 1.2'
 
-# act_as_paranoidの置き換え(論理削除)
-gem 'paranoia'
+# # act_as_paranoidの置き換え(論理削除)
+# gem 'paranoia'
 
-# aws-s3の置き換え
-gem 'aws-sdk', '< 2.0'
+# # aws-s3の置き換え
+# gem 'aws-sdk', '< 2.0'
 
 # delayed_job系
 gem 'delayed_job_active_record'
 gem 'daemons'
 
-# メルマガ系
-gem 'mailchimp-api'
-#gem 'mandrill-api' mandrillは使ってないみたい
+# # メルマガ系
+# gem 'mailchimp-api'
+# #gem 'mandrill-api' mandrillは使ってないみたい
 
 # プログラム処理系
 gem 'hpricot'
@@ -110,17 +111,17 @@ gem 'rb-readline'
 # sessionをredisで
 gem 'redis-rails'
 
-# エラーメール
-gem 'exception_notification'
-
-#gem 'rails-observers', git: 'https://github.com/rails/rails-observers.git'
-
-gem 'sitemap_generator'
-
-
-# group :production do
-  gem 'dalli-elasticache'
-# end
+# # エラーメール
+# gem 'exception_notification'
+#
+# #gem 'rails-observers', git: 'https://github.com/rails/rails-observers.git'
+#
+# gem 'sitemap_generator'
+#
+#
+# # group :production do
+#   gem 'dalli-elasticache'
+# # end
 
 
 gem 'net-sftp'
