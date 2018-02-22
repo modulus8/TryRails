@@ -1,0 +1,14 @@
+table
+  thead
+    tr
+      th ID
+      th Name
+      th spo_id
+      th role
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.id
+        td = user.name
+        td = user.spo_id
+        td = user.role

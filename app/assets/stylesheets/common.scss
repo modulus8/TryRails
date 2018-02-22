@@ -1,0 +1,58 @@
+
+html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+
+a{
+  text-decoration: none;
+  text-decoration-color: #2E2F30;
+  &:hover{opacity: 0.5;}
+}
+
+.user_icon{
+  display: inline-block;
+  height: 35px;
+  width: 35px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px 10px 5px 10px;
+}
+
+.bg-img-cotain{
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.bg-main{background: #f7e4e4;}
+
+.box-shadow-top{
+  box-shadow: 3px 5px 10px #b5a5a5;
+  -webkit-box-shadow: 3px 5px 10px #b5a5a5;
+  -moz-box-shadow: 3px 5px 10px #b5a5a5;
+}
+
+.box-shadow-bottom{
+  box-shadow: 3px -1px 10px #b5a5a5;
+  -webkit-box-shadow: 3px -1px 10px #b5a5a5;
+  -moz-box-shadow: 3px -1px 10px #b5a5a5;
+}
+
+.text-main{color: #c75959;}
+
+.text-main-shadow{text-shadow: 2px 3px 5px #b5a5a5;}
+
+.main-top-pad{padding-top: 60px;}
+
+.click_track_js:active{
+  opacity: 0.8;
+}
+.click_track_js:hover{
+  opacity: 0.8;
+}
+
+
+

@@ -1,0 +1,12 @@
+- tracks.each do |track|
+  .card.w-50.d-inline-block.click_track_js data-tid="#{track.t_id}" ontouchstart=""
+    img.card-img src="#{track.album_img_url}"
+    .card-img-overlay.p-0
+      .w-100.h-100.p-0.m-0 style="background: rgba(45,45,45, 0.4)"
+        .card-text.text-white
+          p
+            = track.release_date.strftime("%y-%m-%d")
+          p.px-2
+            = track.name
+          small.px-2.mb-0
+            = track.artist_name

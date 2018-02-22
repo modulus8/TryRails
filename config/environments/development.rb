@@ -26,6 +26,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  #redis
+  config.session_store :redis_store, servers: 'redis://localhost:6379/0', expire_in: 1.month
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
@@ -51,4 +54,11 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  ProviderInfo = {
+      :spotify => {:key => 'ce27ab4e670a4baea51e9858b57c198a' , :secret => 'a1443cd9728d40aa856eeb21fc3a49df'},
+      :twitter => {:key => '' , :secret => ''},
+      :google => {:key => '' , :secret => ''},
+  }
+
 end

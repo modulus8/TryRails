@@ -1,0 +1,7 @@
+.alert.fixed-bottom.w-100.m-0.rounded-0.alert-dismissible.box-shadow-bottom.bg-white
+  button.rounded.bg-white.p-2.close data-dismiss="alert"
+    i.fa.fa-times-circle
+  iframe src="" width="300" height="80" frameborder="0" allowtransparency="true"
+  p.m-0
+    -if user_signed_in?
+      = link_to "お気に入り", "", class: "btn btn-info"

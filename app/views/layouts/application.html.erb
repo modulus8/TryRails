@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Payermusic</title>
+    <title>Comuptify</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta charset="UTF-8">
+    <meta name="keyword" content="spotify,プレイリスト,自動作成,最新曲,">
+    <meta name="description" content="spotifyを利用して、最新曲から好みのプレイリストを自動で作成するサイトです。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link href="favicon.ico" rel="shortcut icon" />
+    <link href="apple-touch-icon.png" rel="apple-touch-icon" >
   </head>
 
   <body>
-    <%= yield %>
+    <header class="mx-auto my-0 fixed-top box-shadow-top">
+      <%- flash.each do |key, value|%>
+          <%- key = "info" if key == "notice"%>
+          <%- key = "danger"  if key == "alert"%>
+          <div class="alert-<%= key%> m-0 p-0 rounded-0 text-center alert-out">
+            <%= value%>
+          </div>
+      <%- end%>
+      <nav class="navbar navbar-expand-lg bg-main p-0 m-0">
+        <ul class="nav nav-pills w-100 clearfix">
+          <li class="nav-item float-left w-75">
+            <h1 class="font-italic font-weight-bold p-2 m-0 h5"><a class="navbar-brand text-main text-main-shadow" href="/">Comuptify</a></h1>
+          </li>
+          <% if user_signed_in? %>
+            <li class="nav-item float-right w-25">
+              <a class="pt-1 pr-2 float-right" href="/mypage">
+                <div class="user_icon box-shadow-top" style="background-image: url('<%= @current_user.load_img %>')"></div>
+              </a>
+            </li>
+          <% else %>
+            <li class="nav-item float-right w-25">
+              <a class="text-center text-info float-right pr-2" href="/auth/spotify">
+                <div class="clearfix">Spotify<br />ログイン</div>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+    <main class="main-top-pad">
+      <%= yield %>
+    </main>
+    <footer class="bg-main box-shadow-bottom clearfix">
+      <p class="p-2 m-0 text-main float-left w-70">
+        <small>このサイトの製作者：<i class="fa fa-envelope fa-fw"></i></small>
+        <a href="https://twitter.com/comuptify" rel="nofollow" target="_blank">Twitter</a>
+      </p>
+      <p class="p-2 m-0 float-right w-30">
+        <%- if user_signed_in? %>
+          <a href="/log_out">ログアウト</a>
+        <%- end%>
+      </p>
+    </footer>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.alert-out').css('display', 'none').fadeIn(300).delay(2000).fadeOut(1000);
+      });
+    </script>
   </body>
 </html>
