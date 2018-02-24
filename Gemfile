@@ -66,11 +66,11 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'devise'
-gem 'omniauth'
+gem 'omniauth', '1.8.1'
 gem 'twitter'
 gem 'oa-oauth'
 gem 'koala'
-gem 'rspotify' #spotify
+gem 'rspotify', '1.24.0' #spotify
 
 
 gem 'will_paginate'
@@ -126,3 +126,8 @@ gem 'redis'
 
 
 gem 'net-sftp'
+
+gem 'passenger'
+
+gem 'execjs'
+gem 'therubyracer'
