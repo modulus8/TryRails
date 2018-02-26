@@ -5,7 +5,7 @@ Rails.application.configure do
   config.cache_classes = true
 
   #redis
-  config.session_store :redis_store, servers: 'redis://localhost:6379/0', expire_in: 3.months
+  config.session_store :redis_store, servers: 'redis://localhost:6379/0', expire_in: 3.months.from_now
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
