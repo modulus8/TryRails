@@ -35,6 +35,18 @@
             | ログイン
           | してサイトをご利用下さい。
 
+  - if @all_played_tracks.present?
+    section.mt-4
+      h2.text-left.h5
+        | Played Tracks -再生されているトラック-
+      = render partial: "shared/album_card", locals: {tracks: @all_played_tracks}
+
+  - if @recently_played.present?
+    section.mt-4
+      h2.text-left.h5
+        | Tracks You Played -再生履歴-
+      = render partial: "shared/album_card", locals: {tracks: @recently_played}
+
   .row.my-4
     .col
       .card
@@ -53,7 +65,7 @@
   /- cache "top_track_list", expires_in: 3.hours, skip_digest: true
   section
     h2.text-left.h5
-      | Latest Track -最新トラック-
+      | Latest Tracks -最新トラック-
     = render partial: "shared/album_card", locals: { tracks: @tracks}
 
 

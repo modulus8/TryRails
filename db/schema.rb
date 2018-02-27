@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116063458) do
+ActiveRecord::Schema.define(version: 20180227053540) do
 
   create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "priority",                 default: 0, null: false
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180116063458) do
     t.string   "preview_url"
     t.integer  "track_number"
     t.datetime "release_date"
+    t.datetime "played_at"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
