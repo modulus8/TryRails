@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     return return_tracks
   end
 
-    private
+  private
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
