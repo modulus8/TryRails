@@ -54,5 +54,14 @@ a{
   opacity: 0.8;
 }
 
-
+//paginate
+.pagination{
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  span, em, a{
+    font-size: 1.4em;
+    padding: 0 0.3em;
+  }
+}
 

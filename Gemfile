@@ -70,7 +70,7 @@ gem 'omniauth', '1.8.1'
 gem 'twitter'
 gem 'oa-oauth'
 gem 'koala'
-gem 'rspotify', '1.25.1' #spotify refresh token
+gem 'rspotify', '1.25.1' #spotify
 
 
 gem 'will_paginate'
