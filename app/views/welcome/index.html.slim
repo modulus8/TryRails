@@ -116,7 +116,7 @@ javascript:
          var fav_url = "/rspotify/save_tracks?id=";
          $("#control-box").html("#{escape_javascript(render 'shared/control_box')}");
          $("#control-box").find("iframe").attr("src", play_url + id);
-         $("#control-box").find("a").attr("href", fav_url + id);
+         $("#control-box").find("#favorite").attr("href", fav_url + id);
      })
   });
 
