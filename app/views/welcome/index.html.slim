@@ -35,12 +35,17 @@
             | ログイン
           | してサイトをご利用下さい。
 
-  - if @all_played_tracks.present?
-    .row.my-4
-      .col
-        h2.text-left.h5
-          | Played Tracks -みんなの再生履歴-
-        = render partial: "shared/album_card", locals: {tracks: @all_played_tracks}
+  - cache "all_history_top", expires_in: 3.minutes, skip_digest: true do
+    - if @all_played_tracks.present?
+      .row.my-4
+        .col
+          h2.text-left.h5
+            | Played Tracks -みんなの再生履歴-
+          = render partial: "shared/album_card", locals: {tracks: @all_played_tracks}
+          .more_show.btn.btn-info.w-100.border.rounded-bottom
+            a href="/tracks?type=all_history"
+              span.text-white
+                | もっとみる
 
   - if @recently_played.present?
     .row.my-4
@@ -65,12 +70,16 @@
 
 
 
-  .row.my-4
-    .col
-      h2.text-left.h5
-        | Latest Tracks -最新トラック-
-      = render partial: "shared/album_card", locals: { tracks: @tracks}
-
+  - cache "latest_tracks_top", expires_in: 3.minutes, skip_digest: true do
+    .row.my-4
+      .col
+        h2.text-left.h5
+          | Latest Tracks -最新トラック-
+        = render partial: "shared/album_card", locals: { tracks: @tracks}
+        .more_show.btn.btn-success.w-100.border.rounded-bottom
+          a href="/tracks"
+            span.text-white
+              | もっとみる
 
   .row.my-4
     .col
@@ -96,31 +105,6 @@
                 | トップにあるボタンを押します。
 
 
-    / table.table
-    /   thead
-    /     tr
-    /       th Name
-    /       th Album
-    /       th Image
-    /       th Artist
-    /       th Date
-    /       - if @current_user.present?
-    /         th Save
-    /       th Listen(30sec)
-    /   tbody
-    /     - @tracks.each do |track|
-    /       tr
-    /         td = track.name
-    /         td = track.album_name
-    /         td.bg-img-cotain style="background-image: url(#{track.album_img_url})"
-    /         td = track.artist_name
-    /         td = track.release_date.strftime("%y-%m-%d")
-    /         - if @current_user.present?
-    /           td
-    /             = link_to "保存", "/rspotify/save_tracks?id=#{track.t_id}"
-    /         td
-    /           audio src="#{track.preview_url}" controls="controls"
-
 #control-box
 
 javascript:
@@ -130,7 +114,6 @@ javascript:
          var id = $(this).attr("data-tid");
          var play_url = "https://open.spotify.com/embed?theme=white&view=coverart&uri=spotify%3Atrack%3A";
          var fav_url = "/rspotify/save_tracks?id=";
-         console.log(id);
          $("#control-box").html("#{escape_javascript(render 'shared/control_box')}");
          $("#control-box").find("iframe").attr("src", play_url + id);
          $("#control-box").find("a").attr("href", fav_url + id);

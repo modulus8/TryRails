@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     @tracks = Track.where("release_date >= ?", Time.now - 1.weeks).order("RAND()").limit(6)
-    @all_played_tracks = Track.where.not(played_at: nil).order(played_at: :desc).limit(20).order("RAND()").limit(4)
+    @all_played_tracks = Track.where.not(played_at: nil).order(played_at: :desc).limit(40).order("RAND()").limit(4)
     if @current_user.present?
       begin #rspotifyのrefresh_token bugをバージョンアップで解決済み。
         spotify_user = RSpotify::User.new(@current_user.spo_hash)

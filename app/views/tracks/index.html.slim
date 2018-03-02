@@ -1,0 +1,49 @@
+nav aria-label="breadcrumb"
+  ol.breadcrumb.bg-white
+    li.breadcrumb-item
+      a href="/"
+        | Home
+    li.breadcrumb-item.active aria-current="page"
+      | Tracks
+
+
+.container.text-center
+  .row
+    .col.pb-3
+      h2.text-left.h5
+        = @title
+  - @tracks.each do |track|
+    .row.click_track_js data-tid="#{track.t_id}"
+      .col-3
+        img.img-thumbnail src="#{track.album_img_url}" alt="#{track.album_name}"
+      .col-9
+        p.text-left
+          = track.release_date.strftime("%y-%m-%d")
+        p
+          strong
+            = track.name
+        p.text-right
+          = track.artist_name
+
+
+
+
+  .row
+    .col
+      .paginate_frame.p-3.w-100
+        = will_paginate @tracks, previous_label: '前', next_label: '次', inner_window: 2, outer_window: 1
+
+#control-box
+
+javascript:
+    //#control-boxの表示
+    $(function () {
+        $(".container").on("click", ".click_track_js", function () {
+            var id = $(this).attr("data-tid");
+            var play_url = "https://open.spotify.com/embed?theme=white&view=coverart&uri=spotify%3Atrack%3A";
+            var fav_url = "/rspotify/save_tracks?id=";
+            $("#control-box").html("#{escape_javascript(render 'shared/control_box')}");
+            $("#control-box").find("iframe").attr("src", play_url + id);
+            $("#control-box").find("a").attr("href", fav_url + id);
+        })
+    });

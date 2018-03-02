@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tracks do
+  resources :tracks, :only => [:index] do
   end
 
   resources :rspotify do
