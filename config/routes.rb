@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :tracks, :only => [:index] do
   end
 
-  resources :comments, :only => [:index] do
+  resources :comments, :only => [:index, :create] do
   end
 
   resources :rspotify do

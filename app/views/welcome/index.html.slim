@@ -35,6 +35,14 @@
             | ログイン
           | してサイトをご利用下さい。
 
+  - cache "comments_top", expires_in: 1.minutes, skip_digest: true do
+    - if @comments.present?
+      .row.mt-4
+        .col
+          h2.text-left.h5
+            | Recommended -ユーザーのおすすめ-
+          = render partial: "shared/comments", locals: {comments: @comments}
+
   - cache "all_history_top", expires_in: 3.minutes, skip_digest: true do
     - if @all_played_tracks.present?
       .row.mt-4
@@ -120,12 +128,14 @@ javascript:
   //#control-boxの表示
   $(function(){
      $(".col").on("click", ".click_track_js", function(){
-         var id = $(this).attr("data-tid");
+         var tid = $(this).attr("data-tid");
+         var id = $(this).attr("data-id");
          var play_url = "https://open.spotify.com/embed?theme=white&view=coverart&uri=spotify%3Atrack%3A";
          var fav_url = "/rspotify/save_tracks?id=";
          $("#control-box").html("#{escape_javascript(render 'shared/control_box')}");
-         $("#control-box").find("iframe").attr("src", play_url + id);
-         $("#control-box").find("#favorite").attr("href", fav_url + id);
+         $("#control-box").find("iframe").attr("src", play_url + tid);
+         $("#control-box").find("#favorite").attr("href", fav_url + tid);
+         $("#model-t_id").val(id);
      })
   });
 

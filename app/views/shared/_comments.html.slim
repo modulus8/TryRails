@@ -1,0 +1,6 @@
+- comments.each do |comment|
+  .w-100.float-none
+    .comment-img-frame.w-25.float-left
+      img.img-thumbnail src="#{comment.track.album_img_url}" alt="#{comment.track.album_name}"
+    .comment-text-frame.w-75.float-right
+      = comment.body
