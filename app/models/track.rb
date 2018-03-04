@@ -3,6 +3,7 @@ class Track < ApplicationRecord
   validates :t_id, uniqueness: true
   validates :release_date, presence: true
   has_one :track_analyze
+  has_many :comments
 
   def self.select_tracks(property)
     tracks = self.where("release_date >= ?", Time.now - 1.weeks)

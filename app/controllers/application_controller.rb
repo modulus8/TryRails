@@ -21,20 +21,24 @@ class ApplicationController < ActionController::Base
         when "recently"
           t.played_at = Time.now
       end
-      # analyze
-      feature = track.audio_features
-      t.track_analyze = TrackAnalyze.new(:track_id => t.id) if t.track_analyze.blank?
-      t.track_analyze.key = feature.key
-      t.track_analyze.danceability = feature.danceability
-      t.track_analyze.energy = feature.energy
-      t.track_analyze.speechiness = feature.speechiness
-      t.track_analyze.acousticness = feature.acousticness
-      t.track_analyze.instrumentalness = feature.instrumentalness
-      t.track_analyze.liveness = feature.liveness
-      t.track_analyze.valence = feature.valence
-      t.track_analyze.duration_ms = feature.duration_ms
-      t.track_analyze.save!
-      t.save!
+      # # analyze
+      # begin
+      #   feature = track.audio_features
+      #   t.track_analyze = TrackAnalyze.new(:track_id => t.id) if t.track_analyze.blank?
+      #   t.track_analyze.key = feature.key
+      #   t.track_analyze.danceability = feature.danceability
+      #   t.track_analyze.energy = feature.energy
+      #   t.track_analyze.speechiness = feature.speechiness
+      #   t.track_analyze.acousticness = feature.acousticness
+      #   t.track_analyze.instrumentalness = feature.instrumentalness
+      #   t.track_analyze.liveness = feature.liveness
+      #   t.track_analyze.valence = feature.valence
+      #   t.track_analyze.duration_ms = feature.duration_ms
+      #   t.track_analyze.save!
+      #   t.save!
+      # rescue
+      #   p "エラー：#{t.name} => audio features 404 not found."
+      # end
       return_tracks << t
     end
     return return_tracks

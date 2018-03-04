@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   resources :tracks, :only => [:index] do
   end
 
+  resources :comments, :only => [:index] do
+  end
+
   resources :rspotify do
     collection do
       get :save_tracks

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :spo_id, uniqueness: true
   serialize :spo_hash
   has_many :playlist_properties
+  has_many :comments
 
   def self.find_or_create_from_auth(auth)
     user = self.find_or_create_by(spo_id: auth["id"])
