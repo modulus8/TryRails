@@ -4,8 +4,6 @@
   iframe src="" width="300" height="80" frameborder="0" allowtransparency="true"
   p.m-0
     -if user_signed_in?
-      button.btn.btn-primary.mr-2 type="button" data-toggle="modal" data-target="#exampleModalLong"
-        | コメント投稿
+      / button.btn.btn-primary.mr-2 type="button" data-toggle="modal" data-target="#exampleModalLong"
+      /   | おすすめ投稿
       = link_to "お気に入り", "", class: "btn btn-info", id: "favorite"
-
-= render "shared/form_modal"

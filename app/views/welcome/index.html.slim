@@ -37,22 +37,28 @@
 
   - cache "all_history_top", expires_in: 3.minutes, skip_digest: true do
     - if @all_played_tracks.present?
-      .row.my-4
+      .row.mt-4
         .col
           h2.text-left.h5
             | Played Tracks -みんなの再生履歴-
           = render partial: "shared/album_card", locals: {tracks: @all_played_tracks}
-          .more_show.btn.btn-info.w-100.border.rounded-bottom
-            a href="/tracks?type=all_history"
-              span.text-white
-                | もっとみる
+      .row.m-0.p-0
+        .col.m-0.p-0
+          .more_show.bg-info.w-100.border.rounded-bottom
+            a.d-block.w-100.py-3.text-white href="/tracks?type=all_history"
+              | もっとみる
 
   - if @recently_played.present?
-    .row.my-4
+    .row.mt-4
       .col
         h2.text-left.h5
           | Tracks You Played -自分の再生履歴-
         = render partial: "shared/album_card", locals: {tracks: @recently_played}
+    .row.m-0.p-0
+      .col.m-0.p-0
+        .more_show.bg-dark.w-100.border.rounded-bottom
+          a.d-block.w-100.py-3.text-white href="/tracks?type=my_history"
+            | もっとみる
 
   .row.my-4
     .col
@@ -71,15 +77,16 @@
 
 
   - cache "latest_tracks_top", expires_in: 3.minutes, skip_digest: true do
-    .row.my-4
+    .row.mt-4
       .col
         h2.text-left.h5
           | Latest Tracks -最新トラック-
         = render partial: "shared/album_card", locals: { tracks: @tracks}
-        .more_show.btn.btn-success.w-100.border.rounded-bottom
-          a href="/tracks"
-            span.text-white
-              | もっとみる
+    .row.m-0.p-0
+      .col.m-0.p-0
+        .more_show.bg-success.w-100.border.rounded-bottom
+          a.d-block.w-100.py-3.text-white href="/tracks"
+            | もっとみる
 
   .row.my-4
     .col
@@ -106,6 +113,8 @@
 
 
 #control-box
+= render "shared/form_modal"
+
 
 javascript:
   //#control-boxの表示
