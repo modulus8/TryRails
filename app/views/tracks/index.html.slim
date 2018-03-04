@@ -31,10 +31,9 @@ nav aria-label="breadcrumb"
 
 
 
-  .row
+  .row.mt-3
     .col
-      .paginate_frame.py-3.w-100
-        = will_paginate @tracks, previous_label: '前', next_label: '次', inner_window: 2, outer_window: 1
+      = will_paginate @tracks, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer, previous_label: '前', next_label: '次', inner_window: 1, outer_window: 0
 
 #control-box
 

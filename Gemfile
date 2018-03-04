@@ -74,6 +74,7 @@ gem 'rspotify', '1.25.1' #spotify
 
 
 gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 # sp pc viewの切り分け
 gem 'jpmobile'
