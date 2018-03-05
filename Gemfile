@@ -92,6 +92,7 @@ gem 'actionpack-action_caching', '~> 1.2'
 # gem 'aws-sdk', '< 2.0'
 
 # delayed_job系
+gem "delayed_job"
 gem 'delayed_job_active_record'
 gem 'daemons'
 

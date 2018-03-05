@@ -341,6 +341,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   daemons
+  delayed_job
   delayed_job_active_record
   devise
   execjs
