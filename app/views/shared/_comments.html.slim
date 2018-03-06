@@ -1,6 +1,16 @@
 - comments.each do |comment|
-  .w-100.float-none
+  .comment-frame.w-100.p-2.clearfix data-tid="#{comment.track.t_id}"
     .comment-img-frame.w-25.float-left
+      = comment.feeling
       img.img-thumbnail src="#{comment.track.album_img_url}" alt="#{comment.track.album_name}"
-    .comment-text-frame.w-75.float-right
-      = comment.body
+      div
+        = comment.track.name
+    .comment-text-frame.w-75.float-right.text-left.pl-3
+      = raw(comment.body.gsub("\n", "<br />"))
+      .user-info-frame.w-100.pt-3.float-none
+        .user_icon.float-right style="background-image: url('#{comment.user.load_img}')"
+        .comment-sub-info.float-left.w-100
+          .text-left.pl-1
+            = comment.updated_at.strftime("%m-%d %H:%M")
+          .text-right.pr-2
+            = comment.user_name

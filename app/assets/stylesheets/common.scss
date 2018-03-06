@@ -87,7 +87,17 @@ nav.pagination{
   border: 1px solid #ced4da;
 }
 
-.comment-img-frame{
+.comment-frame{
+  background: #fff8e8;
+  border-left: solid 10px #ffc06e;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
 }
-.comment-text-frame{
+
+.user-info-frame{
+  overflow: hidden;
+  .comment-sub-info{
+    margin-right: -35px;
+    padding-right: 35px;
+    box-sizing: border-box;
+  }
 }
