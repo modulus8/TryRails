@@ -16,7 +16,7 @@ nav aria-label="breadcrumb"
     .col
       ul.m-0.p-0
         - @tracks.each do |track|
-          li.mx-1.py-1.track-list.click_track_js data-tid="#{track.t_id}"
+          li.w-100.mx-1.py-1.track-list.click_track_js data-tid="#{track.t_id}"
             .col.img-frame
               img.img-thumbnail src="#{track.album_img_url}" alt="#{track.album_name}"
             .col.text-frame
@@ -33,7 +33,7 @@ nav aria-label="breadcrumb"
 
   .row.mt-3
     .col
-      = will_paginate @tracks, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer, previous_label: '前', next_label: '次', inner_window: 1, outer_window: 0
+      = will_paginate @tracks, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer, previous_label: '前', next_label: '次', inner_window: 0, outer_window: 0
 
 #control-box
 
