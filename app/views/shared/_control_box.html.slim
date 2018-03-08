@@ -2,8 +2,18 @@
   button.rounded.bg-white.p-2.close data-dismiss="alert"
     i.fa.fa-times-circle
   iframe src="" width="300" height="80" frameborder="0" allowtransparency="true"
-  p.m-0
+  .box-menu
     -if user_signed_in?
-      / button.btn.btn-primary.mr-2 type="button" data-toggle="modal" data-target="#exampleModalLong"
-      /   | おすすめ投稿
+      button.btn.btn-primary.mr-2 type="button" data-toggle="modal" data-target="#exampleModalLong" id="recommend-btn"
+        | おすすめ投稿
       = link_to "お気に入り", "", class: "btn btn-info", id: "favorite"
+
+
+javascript:
+  $(function(){
+    $(".box-menu").on("click", "#recommend-btn", function(){
+      setTimeout(function(){
+          $("#modal_text_area").focus();
+      }, 800);
+    });
+  });

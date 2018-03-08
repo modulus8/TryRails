@@ -8,10 +8,19 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+      <%= form_tag("/comments", method: :post, id: "modal_form") do %>
+        <%= hidden_field_tag :id, "", id: "model-t_id"%>
+        <%= select_tag :feeling, options_for_select(
+            [["Cool", "cool"], ["Hot", "hot"], ["Fun", "fun"], ["Sad", "sad"], ["Relax", "relax"], ["Love", "love"], ["Wonder", "wonder"], ["Dark", "dark"], ["None", "none"]],
+            selected: "none"),
+            class: "custom-select feeling-select"
+        %>
+        <span class="px-2">曲の雰囲気を選択しよう</span>
+        <%= text_area_tag "body", "" , maxlength: 280, class: "modal_text_area", id: "modal_text_area", required: true, placeholder: "曲へのコメントをしよう"%>
+      <%- end%>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">投稿</button>
+        <button type="button" class="btn btn-primary" onclick="$('#modal_form').submit()">投稿</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
       </div>
     </div>
