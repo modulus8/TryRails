@@ -16,7 +16,7 @@ nav aria-label="breadcrumb"
     .col
       ul.m-0.p-0
         - @tracks.each do |track|
-          li.mx-1.py-1.track-list.click_track_js data-tid="#{track.t_id}"
+          li.w-100.mx-1.py-1.track-list.click_track_js data-tid="#{track.t_id}"
             .col.img-frame
               img.img-thumbnail src="#{track.album_img_url}" alt="#{track.album_name}"
             .col.text-frame
