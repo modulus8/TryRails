@@ -42,6 +42,12 @@
           h2.text-left.h5
             | Recommended -ユーザーのおすすめ-
           = render partial: "shared/comments", locals: {comments: @comments}
+      .row.m-0.p-0
+        .col.m-0.p-0
+          .more_show.bg-danger.w-100.border.rounded-bottom
+            a.d-block.w-100.py-3.text-white href="/comments"
+              | もっとみる
+
 
   - cache "all_history_top", expires_in: 3.minutes, skip_digest: true do
     - if @all_played_tracks.present?

@@ -7,6 +7,7 @@ class Comment < ApplicationRecord
 
   private
   def cache_sweep
+    ActionController::Base.new.expire_fragment("comments_top")
   end
 
 end

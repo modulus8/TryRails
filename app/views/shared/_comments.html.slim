@@ -1,5 +1,5 @@
 - comments.each do |comment|
-  .comment-frame.w-100.p-2.clearfix data-tid="#{comment.track.t_id}"
+  .comment-frame.click_track_js.w-100.p-2.clearfix.mb-1 data-tid="#{comment.track.t_id}" data-id="#{comment.track_id}"
     .comment-img-frame.w-25.float-left
       .w-100
         img.img-thumbnail src="#{comment.track.album_img_url}" alt="#{comment.track.album_name}"

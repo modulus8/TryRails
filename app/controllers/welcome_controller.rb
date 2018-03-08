@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
         @recently_played = nil
       end
     end
-    @comments = Comment.order(created_at: :desc).limit(1)
+    @comments = Comment.order(updated_at: :desc).limit(10).order("RAND()").limit(2)
   end
 
   def update_playlist

@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
       # rescue
       #   p "エラー：#{t.name} => audio features 404 not found."
       # end
+      t.save
       return_tracks << t
     end
     return return_tracks
