@@ -1,0 +1,55 @@
+nav aria-label="breadcrumb"
+  ol.breadcrumb.bg-white
+    li.breadcrumb-item
+      a href="/"
+        | Home
+    li.breadcrumb-item.active aria-current="page"
+      | Tracks
+
+
+.container.text-center
+  .row
+    .col.pb-3
+      h2.text-left.h5
+        = @title
+  .row
+    .col
+      ul.m-0.p-0
+        - @tracks.each do |track|
+          li.mx-1.py-1.track-list.click_track_js data-tid="#{track.t_id}"
+            .col.img-frame
+              img.img-thumbnail src="#{track.album_img_url}" alt="#{track.album_name}"
+            .col.text-frame
+              p.text-left.mb-2
+                = track.release_date.strftime("%y-%m-%d")
+              p.mb-2
+                strong
+                  = track.name
+              p.text-right.mb-2
+                = track.artist_name
+
+
+
+
+  .row.mt-3
+    .col
+      = will_paginate @tracks, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer, previous_label: '前', next_label: '次', inner_window: 0, outer_window: 0
+
+#control-box
+= render "shared/form_modal"
+
+
+javascript:
+  //#control-boxの表示
+  $(function(){
+     $(".container").on("click", ".click_track_js", function(){
+         var tid = $(this).attr("data-tid");
+         var id = $(this).attr("data-id");
+         var play_url = "https://open.spotify.com/embed?theme=white&view=coverart&uri=spotify%3Atrack%3A";
+         var fav_url = "/rspotify/save_tracks?id=";
+         $("#control-box").html("#{escape_javascript(render 'shared/control_box')}");
+         $("#control-box").find("iframe").attr("src", play_url + tid);
+         $("#control-box").find("#favorite").attr("href", fav_url + tid);
+         $("#model-t_id").val(id);
+     })
+  });

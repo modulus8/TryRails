@@ -9,6 +9,7 @@ class RspotifyController < ApplicationController
     user = User.find_or_create_from_auth(spo_hash)
     # ユーザーIDをセッションに保存する
     session[:user_id] = user.id
+    cookies["_session_id"] =  { :value => session.id, :expires => 3.months.from_now }
     redirect_to "/", :notice => "ログインしました。"
   end
 

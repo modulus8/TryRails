@@ -66,14 +66,15 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'devise'
-gem 'omniauth'
+gem 'omniauth', '1.8.1'
 gem 'twitter'
 gem 'oa-oauth'
 gem 'koala'
-gem 'rspotify' #spotify
+gem 'rspotify', '1.25.1' #spotify
 
 
 gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 # sp pc viewの切り分け
 gem 'jpmobile'
@@ -91,6 +92,7 @@ gem 'actionpack-action_caching', '~> 1.2'
 # gem 'aws-sdk', '< 2.0'
 
 # delayed_job系
+gem "delayed_job"
 gem 'delayed_job_active_record'
 gem 'daemons'
 
@@ -126,3 +128,8 @@ gem 'redis'
 
 
 gem 'net-sftp'
+
+gem 'passenger'
+
+gem 'execjs'
+gem 'therubyracer'

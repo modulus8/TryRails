@@ -50,8 +50,10 @@
       .card.border-danger
         .card-body
           h4.card-title.bg-danger.text-white.p-2.rounded-top
-            | 自動作成するトラックの条件設定
+            | 自動作成の条件設定
           .card-text.p-2
+            p.m-0
+              | ※0.1ずつ1.0までの範囲で入力。
             .form_wrapper
               = form_tag(mypage_update_property_path(@current_user.id))
                 .p-2
@@ -64,41 +66,48 @@
                     label.custom-control-label for="customCheck1"
                       | BGM曲の割合(0.2以下でなし)
                     .m-1
-                      = number_field_tag "instrumentalness[num]", property.instrumentalness, min: "0", max: "1", step: "0.1"
+                      = number_field_tag "instrumentalness[num]", property.instrumentalness, min: "0", max: "1", step: "0.1", class: "border border-primary"
                 .border.border-danger.rounded.mb-1
                   .custom-control.custom-checkbox.m-2
                     = check_box_tag "liveness[is]", "1", checked = property.liveness.present?, id: "customCheck2", class: "custom-control-input"
                     label.custom-control-label for="customCheck2"
                       | ライブ曲の割合(0.2以下でなし)
                     .m-1
-                      = number_field_tag "liveness[num]", property.liveness, min: "0", max: "1", step: "0.1"
+                      = number_field_tag "liveness[num]", property.liveness, min: "0", max: "1", step: "0.1", class: "border border-primary"
                 .border.border-danger.rounded.mb-1
                   .custom-control.custom-checkbox.m-2
                     = check_box_tag "acousticness[is]", "1", checked = property.acousticness.present?, id: "customCheck3", class: "custom-control-input"
                     label.custom-control-label for="customCheck3"
                       | 生楽器使用曲の割合
                     .m-1
-                      = number_field_tag "acousticness[num]", property.acousticness, min: "0", max: "1", step: "0.1"
+                      = number_field_tag "acousticness[num]", property.acousticness, min: "0", max: "1", step: "0.1", class: "border border-primary"
                 .border.border-danger.rounded.mb-1
                   .custom-control.custom-checkbox.m-2
                     = check_box_tag "danceability[is]", "1", checked = property.danceability.present?, id: "customCheck4", class: "custom-control-input"
                     label.custom-control-label for="customCheck4"
                       | ダンス曲の割合
                     .m-1
-                      = number_field_tag "danceability[num]", property.danceability, min: "0", max: "1", step: "0.1"
+                      = number_field_tag "danceability[num]", property.danceability, min: "0", max: "1", step: "0.1", class: "border border-primary"
                 .border.border-danger.rounded.mb-1
                   .custom-control.custom-checkbox.m-2
                     = check_box_tag "energy[is]", "1", checked = property.energy.present?, id: "customCheck5", class: "custom-control-input"
                     label.custom-control-label for="customCheck5"
                       | 激しい曲の割合
                     .m-1
-                      = number_field_tag "energy[num]", property.energy, min: "0", max: "1", step: "0.1"
+                      = number_field_tag "energy[num]", property.energy, min: "0", max: "1", step: "0.1", class: "border border-primary"
                 .border.border-danger.rounded.mb-1
                   .custom-control.custom-checkbox.m-2
                     = check_box_tag "valence[is]", "1", checked = property.valence.present?, id: "customCheck6", class: "custom-control-input"
                     label.custom-control-label for="customCheck6"
                       | 曲の明るさ(0.5基準。0.5以上で明るい曲。)
                     .m-1
-                      = number_field_tag "valence[num]", property.valence, min: "0", max: "1", step: "0.1"
+                      = number_field_tag "valence[num]", property.valence, min: "0", max: "1", step: "0.1", class: "border border-primary"
                 .p-0.m-0
                   = submit_tag "設定", class: "btn btn-danger p-2 m-2"
+
+javascript:
+  $(function(){
+     $(".m-1").on("click", "input[type=number]", function(){
+        $(this).parent(".m-1").prevAll("input[type=checkbox]").attr("checked", true);
+     });
+  });

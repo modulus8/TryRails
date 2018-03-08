@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :spo_id, uniqueness: true
   serialize :spo_hash
   has_many :playlist_properties
+  has_many :comments
 
   def self.find_or_create_from_auth(auth)
     user = self.find_or_create_by(spo_id: auth["id"])
@@ -14,13 +15,13 @@ class User < ApplicationRecord
     user.email = auth["email"]
     user.password = "spotify"
     user.spo_hash = auth
-    user.img_url = auth["images"][-1]["url"]
+    user.img_url = auth["images"][-1]["url"] if auth["images"].present?
     user.save!
     if user.playlist_properties.blank?
       user.playlist_properties.new(
         user_id: user.id,
         style: "and",
-        updown: "up"
+        updown: "down"
       )
       user.save!
     end

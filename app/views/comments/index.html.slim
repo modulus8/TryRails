@@ -1,0 +1,42 @@
+nav aria-label="breadcrumb"
+  ol.breadcrumb.bg-white
+    li.breadcrumb-item
+      a href="/"
+        | Home
+    li.breadcrumb-item.active aria-current="page"
+      | Comments
+
+
+.container.text-center
+  .row
+    .col.pb-3
+      h2.text-left.h5
+        = @title
+  .row
+    .col
+      = render partial: "shared/comments", locals: {comments: @comments}
+
+
+
+  .row.mt-3
+    .col
+      = will_paginate @comments, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer, previous_label: '前', next_label: '次', inner_window: 0, outer_window: 0
+
+#control-box
+= render "shared/form_modal"
+
+
+javascript:
+    //#control-boxの表示
+    $(function(){
+        $(".col").on("click", ".click_track_js", function(){
+            var tid = $(this).attr("data-tid");
+            var id = $(this).attr("data-id");
+            var play_url = "https://open.spotify.com/embed?theme=white&view=coverart&uri=spotify%3Atrack%3A";
+            var fav_url = "/rspotify/save_tracks?id=";
+            $("#control-box").html("#{escape_javascript(render 'shared/control_box')}");
+            $("#control-box").find("iframe").attr("src", play_url + tid);
+            $("#control-box").find("#favorite").attr("href", fav_url + tid);
+            $("#model-t_id").val(id);
+        })
+    });
