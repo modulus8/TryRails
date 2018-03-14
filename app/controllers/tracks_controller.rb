@@ -14,7 +14,7 @@ class TracksController < ApplicationController
           end
       end
     else
-      @tracks = Track.order(release_date: :desc).paginate(:page => params[:page], :per_page => 20)
+      @tracks = Track.where("release_date <= ?", Time.now).order(release_date: :desc).paginate(:page => params[:page], :per_page => 20)
       @title = "Latest Tracks -最新トラック-"
     end
   end
