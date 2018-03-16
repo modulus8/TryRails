@@ -14,8 +14,8 @@
             | ゲストさん
 
   .row.py-2
-    .col
-      - if @current_user.present? && @current_user.playlist_id.present? && @current_user.playlist_properties.present?
+    - if @current_user.present? && @current_user.playlist_id.present? && @current_user.playlist_properties.present?
+      .col-6
         .form_wrapper
           = form_tag(update_playlist_welcome_index_path, method: "get")
             p.p-2.m-0
@@ -23,19 +23,31 @@
             div.p-2
               button.btn.btn-danger.p-2.rounded type="submit"
                 i.fa.fa-dot-circle.fa-3x
-      - elsif @current_user.present?
+      - if @recently_played.present?
+        .col.col-6
+          h2.text-left.h5
+            | Tracks You Played -自分の再生履歴-
+          = render partial: "shared/album_card", locals: {tracks: @recently_played}
+          .m-0.p-0
+            .more_show.bg-dark.w-100.border.rounded-bottom
+              a.d-block.w-100.py-3.text-white href="/tracks?type=my_history"
+                | もっとみる
+
+    - elsif @current_user.present?
+      .col
         .p-1
           a href="/mypage"
             | マイページ
           | からプレイリストを
           br 設定して下さい。
-      - else
+    - else
+      .col
         .p-1
           a href="/auth/spotify"
             | ログイン
           | してサイトをご利用下さい。
 
-  - cache "comments_top", expires_in: 1.minutes, skip_digest: true do
+  - cache "comments_top_pc", expires_in: 1.minutes, skip_digest: true do
     - if @comments.present?
       .row.mt-4
         .col
@@ -44,86 +56,72 @@
           = render partial: "shared/comments", locals: {comments: @comments}
       .row.m-0.p-0
         .col.m-0.p-0
-          .more_show.bg-danger.w-100.border.rounded-bottom
+          .more_show.bg-danger.w-100.border.rounded-bottom.mx-auto
             a.d-block.w-100.py-3.text-white href="/comments"
               | もっとみる
 
 
-  - cache "all_history_top", expires_in: 3.minutes, skip_digest: true do
+  - cache "all_history_top_pc", expires_in: 3.minutes, skip_digest: true do
     - if @all_played_tracks.present?
       .row.mt-4
-        .col
+        .col.col-6
           h2.text-left.h5
             | Played Tracks -みんなの再生履歴-
           = render partial: "shared/album_card", locals: {tracks: @all_played_tracks}
-      .row.m-0.p-0
-        .col.m-0.p-0
-          .more_show.bg-info.w-100.border.rounded-bottom
-            a.d-block.w-100.py-3.text-white href="/tracks?type=all_history"
-              | もっとみる
-
-  - if @recently_played.present?
-    .row.mt-4
-      .col
-        h2.text-left.h5
-          | Tracks You Played -自分の再生履歴-
-        = render partial: "shared/album_card", locals: {tracks: @recently_played}
-    .row.m-0.p-0
-      .col.m-0.p-0
-        .more_show.bg-dark.w-100.border.rounded-bottom
-          a.d-block.w-100.py-3.text-white href="/tracks?type=my_history"
-            | もっとみる
-
-  .row.my-4
-    .col
-      .card
-        .card-body
-          h4.card-title.text-success
-            | How About This Site
-          h6.card-subtitle.mb-2.text-muted.text-secondary
-            | -このサイトについて-
-          p.card-text.text-left
-            | 　音楽配信サイトの一つであるSpotifyを
-            | 使って最新の音楽を発掘します。最新の曲の中から
-            | 好みのタイプを選び、プレイリストを自動で作成します。
-            | またボタンを押すたびに最新曲のプレイリストに更新されます。
+          .m-0.p-0
+            .more_show.bg-info.w-100.border.rounded-bottom
+              a.d-block.w-100.py-3.text-white href="/tracks?type=all_history"
+                | もっとみる
+        .col-6
+          .card
+            .card-body
+              h4.card-title.text-success.h3
+                | How About This Site
+              h6.card-subtitle.mb-2.text-muted.text-secondary.h5
+                | -このサイトについて-
+              .card-text.text-left.h5.pt-4.line-height.pb-5
+                p.text-indent.m-0
+                  | 音楽配信サイトの一つであるSpotifyを
+                  | 使って最新の音楽を発掘します。最新の曲の中から
+                  | 好みのタイプを選び、プレイリストを自動で作成します。
+                p.text-indent.m-0
+                  | またボタンを押すたびに最新曲のプレイリストに更新されます。
 
 
 
-  - cache "latest_tracks_top", expires_in: 3.minutes, skip_digest: true do
-    .row.mt-4
-      .col
+  - cache "latest_tracks_top_pc", expires_in: 3.minutes, skip_digest: true do
+    .row.mt-4.mb-5
+      .col.col-6
         h2.text-left.h5
           | Latest Tracks -最新トラック-
         = render partial: "shared/album_card", locals: { tracks: @tracks}
-    .row.m-0.p-0
-      .col.m-0.p-0
-        .more_show.bg-success.w-100.border.rounded-bottom
-          a.d-block.w-100.py-3.text-white href="/tracks"
-            | もっとみる
+        .m-0.p-0
+          .more_show.bg-success.w-100.border.rounded-bottom
+            a.d-block.w-100.py-3.text-white href="/tracks"
+              | もっとみる
 
-  .row.my-4
-    .col
-      .card
-        .card-body
-          h4.card-title.text-info
-            | How To Use
-          h6.card-subtitle.mb-2.text-muted.text-secondary
-            | -ご利用方法-
-          .card-text.text-left
-            ul
-              li
-                a href="https://www.spotify.com/jp/" rel="nofollow" target="_blank"
-                  | Spotify
-                | に登録します。
-              li
-                | このサイトにログインします。
-              li
-                | マイページに移動します。
-              li
-                | プレイリストの設定をします。
-              li
-                | トップにあるボタンを押します。
+
+      .col-6
+        .card
+          .card-body
+            h4.card-title.text-info.h3
+              | How To Use
+            h6.card-subtitle.mb-2.text-muted.text-secondaryh.h5
+              | -ご利用方法-
+            .card-text.text-left.pb-5
+              ul.h5.line-height
+                li.pt-2
+                  a href="https://www.spotify.com/jp/" rel="nofollow" target="_blank"
+                    | Spotify
+                  | に登録します。
+                li.pt-2
+                  | このサイトにログインします。
+                li.pt-2
+                  | マイページに移動します。
+                li.pt-2
+                  | プレイリストの設定をします。
+                li.pt-2
+                  | トップにあるボタンを押します。
 
 
 #control-box
