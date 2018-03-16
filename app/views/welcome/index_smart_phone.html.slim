@@ -1,0 +1,150 @@
+.container.text-center
+  .row.text-left.py-1.m-0
+    .col.px-0
+      - if @current_user.present?
+        p
+          | こんにちは、
+          span
+            = @current_user.name
+          | さん
+      - else
+        p
+          | こんにちは、
+          span
+            | ゲストさん
+
+  .row.py-2
+    .col
+      - if @current_user.present? && @current_user.playlist_id.present? && @current_user.playlist_properties.present?
+        .form_wrapper
+          = form_tag(update_playlist_welcome_index_path, method: "get")
+            p.p-2.m-0
+              | 登録済みプレイリストを更新
+            div.p-2
+              button.btn.btn-danger.p-2.rounded type="submit"
+                i.fa.fa-dot-circle.fa-3x
+      - elsif @current_user.present?
+        .p-1
+          a href="/mypage"
+            | マイページ
+          | からプレイリストを
+          br 設定して下さい。
+      - else
+        .p-1
+          a href="/auth/spotify"
+            | ログイン
+          | してサイトをご利用下さい。
+
+  - cache "comments_top", expires_in: 1.minutes, skip_digest: true do
+    - if @comments.present?
+      .row.mt-4
+        .col
+          h2.text-left.h5
+            | Recommended -ユーザーのおすすめ-
+          = render partial: "shared/comments", locals: {comments: @comments}
+      .row.m-0.p-0
+        .col.m-0.p-0
+          .more_show.bg-danger.w-100.border.rounded-bottom
+            a.d-block.w-100.py-3.text-white href="/comments"
+              | もっとみる
+
+
+  - cache "all_history_top", expires_in: 3.minutes, skip_digest: true do
+    - if @all_played_tracks.present?
+      .row.mt-4
+        .col
+          h2.text-left.h5
+            | Played Tracks -みんなの再生履歴-
+          = render partial: "shared/album_card", locals: {tracks: @all_played_tracks}
+      .row.m-0.p-0
+        .col.m-0.p-0
+          .more_show.bg-info.w-100.border.rounded-bottom
+            a.d-block.w-100.py-3.text-white href="/tracks?type=all_history"
+              | もっとみる
+
+  - if @recently_played.present?
+    .row.mt-4
+      .col
+        h2.text-left.h5
+          | Tracks You Played -自分の再生履歴-
+        = render partial: "shared/album_card", locals: {tracks: @recently_played}
+    .row.m-0.p-0
+      .col.m-0.p-0
+        .more_show.bg-dark.w-100.border.rounded-bottom
+          a.d-block.w-100.py-3.text-white href="/tracks?type=my_history"
+            | もっとみる
+
+  .row.my-4
+    .col
+      .card
+        .card-body
+          h4.card-title.text-success
+            | How About This Site
+          h6.card-subtitle.mb-2.text-muted.text-secondary
+            | -このサイトについて-
+          .card-text.text-left.line-height
+            p.text-indent.m-0
+              | 音楽配信サイトの一つであるSpotifyを
+              | 使って最新の音楽を発掘します。最新の曲の中から
+              | 好みのタイプを選び、プレイリストを自動で作成します。
+            p.text-indent.m-0
+              | またボタンを押すたびに最新曲のプレイリストに更新されます。
+
+
+
+  - cache "latest_tracks_top", expires_in: 3.minutes, skip_digest: true do
+    .row.mt-4
+      .col
+        h2.text-left.h5
+          | Latest Tracks -最新トラック-
+        = render partial: "shared/album_card", locals: { tracks: @tracks}
+    .row.m-0.p-0
+      .col.m-0.p-0
+        .more_show.bg-success.w-100.border.rounded-bottom
+          a.d-block.w-100.py-3.text-white href="/tracks"
+            | もっとみる
+
+  .row.my-4
+    .col
+      .card
+        .card-body
+          h4.card-title.text-info
+            | How To Use
+          h6.card-subtitle.mb-2.text-muted.text-secondary
+            | -ご利用方法-
+          .card-text.text-left
+            ul.line-height
+              li
+                a href="https://www.spotify.com/jp/" rel="nofollow" target="_blank"
+                  | Spotify
+                | に登録します。
+              li
+                | このサイトにログインします。
+              li
+                | マイページに移動します。
+              li
+                | プレイリストの設定をします。
+              li
+                | トップにあるボタンを押します。
+
+
+#control-box
+= render "shared/form_modal"
+
+
+javascript:
+  //#control-boxの表示
+  $(function(){
+     $(".col").on("click", ".click_track_js", function(){
+         var tid = $(this).attr("data-tid");
+         var id = $(this).attr("data-id");
+         var play_url = "https://open.spotify.com/embed?theme=white&view=coverart&uri=spotify%3Atrack%3A";
+         var fav_url = "/rspotify/save_tracks?id=";
+         $("#control-box").html("#{escape_javascript(render 'shared/control_box')}");
+         $("#control-box").find("iframe").attr("src", play_url + tid);
+         $("#control-box").find("#favorite").attr("href", fav_url + tid);
+         $("#model-t_id").val(id);
+     })
+  });
+
+

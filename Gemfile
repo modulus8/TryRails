@@ -77,7 +77,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
 # sp pc viewの切り分け
-gem 'jpmobile'
+gem 'jpmobile', "5.0.0"
 
 # slim
 gem 'slim'

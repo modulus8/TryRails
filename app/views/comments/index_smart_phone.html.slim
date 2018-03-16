@@ -20,7 +20,7 @@ nav aria-label="breadcrumb"
 
   .row.mt-3
     .col
-      = will_paginate @comments, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer, previous_label: '前', next_label: '次', inner_window: 4, outer_window: 2
+      = will_paginate @comments, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer, previous_label: '前', next_label: '次', inner_window: 0, outer_window: 0
 
 #control-box
 = render "shared/form_modal"
