@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
         end
       end
       @comments = Comment.order(updated_at: :desc).limit(10).order("RAND()").limit(2)
-    else
+    else ############ PC
       @tracks = Track.where("release_date >= ?", Time.now - 1.weeks).where("release_date <= ?", Time.now).order("RAND()").limit(8)
       @all_played_tracks = Track.where.not(played_at: nil).order(played_at: :desc).limit(40).order("RAND()").limit(8)
       if @current_user.present?

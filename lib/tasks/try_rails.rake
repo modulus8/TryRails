@@ -48,4 +48,32 @@ namespace :main do
     p "finished count: #{@count}"
   end
 
+  desc "拡散用ツイート"
+  task :auto_tweet => :environment do
+    time = Time.now
+    begin
+      require "twitter"
+      client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = "D59eNo6vGMhC3lUcOi7bNJevj"
+        config.consumer_secret     = "CctoLN9nLR6pCj2fEOhvY5HwO0rPA3JGtjhvDOFstzJuEZkDEv"
+        config.access_token        = "965386655824691200-xFOrQg2tBpGxQ9RfJfDOwjLoODtgoPJ"
+        config.access_token_secret = "iQf2Xueh16HIuGmncnFI8mbVuTtrGmjbHzVxKI4JZYIBi"
+      end
+      track = Track.where("release_date >= ?", Time.now - 1.weeks).where("release_date <= ?", Time.now).order("RAND()").limit(1).first
+      url = " https://open.spotify.com/track/#{track.t_id}"
+      hash = " #NowPlaying #Spotify ##{track.artist_name} ##{track.album_name} ##{track.name}"
+      comments = [
+          "最新音楽をお届け！",
+          "音楽聴き放題『Spotify』使ってますか？",
+          "無料で聴き放題『Spotify』で音楽を楽しもう！",
+          "おすすめミュージックを探すなら『Spotify』。"
+      ]
+      text = "#{comments.sample(1)[0]} comuptify.site \n" + url + hash
+      client.update(text)
+      p "ツイートされました。#{time}"
+    rescue => e
+      p "ツイートの際エラーが発生しました。#{time}"
+    end
+  end
+
 end
