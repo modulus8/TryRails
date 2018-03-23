@@ -12,9 +12,9 @@
           = comment.track.name
           | ]
       = raw(comment.body.gsub("\n", "<br />"))
-      .user-info-frame.w-100.pt-3.float-none
+      .user-info-frame.w-100.pt-3.clearfix
         .user_icon.float-right style="background-image: url('#{comment.user.load_img}')"
-        .comment-sub-info.float-left.w-100
+        .comment-sub-info.float-left.w-100.clearfix
           .text-left.pl-1
             = comment.updated_at.strftime("%m-%d %H:%M")
           .text-right.pr-2
