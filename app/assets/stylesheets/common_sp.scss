@@ -116,3 +116,9 @@ nav.pagination{
 
 .line-height{line-height: 200%;}
 .text-indent{text-indent: 1em;}
+
+
+.album-list{
+  border-top: 1px solid #a0a0a0;
+  &:nth-last-of-type(1){border-bottom: 1px solid #a0a0a0;}
+}

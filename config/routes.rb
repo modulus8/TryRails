@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :welcome do
     collection do
-      get :update_playlist
+      get :update_playlist, :recommend
     end
   end
 

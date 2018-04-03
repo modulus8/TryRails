@@ -46,4 +46,7 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def recommend
+  end
+
 end
