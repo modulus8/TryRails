@@ -72,7 +72,7 @@ namespace :main do
         config.consumer_key        = "CWctPZAxRH9rhOHoYFwJT8osm"
         config.consumer_secret     = "zrNFx5DGpxAFkx50BZurmjoXtGCWzQADAtpHSrLc7Qb7SKd8um"
         config.access_token        = "965386655824691200-HBAWT5NAZorDiIJdyU5uHoavPN8V0Rx"
-        config.access_token_secret = "	Hh5OlWgUWUVUWgIqYN4ERv82U5UX5zbX0wqA9u0vKlbFw"
+        config.access_token_secret = "Hh5OlWgUWUVUWgIqYN4ERv82U5UX5zbX0wqA9u0vKlbFw"
       end
       track = Track.where("release_date >= ?", Time.now - 1.weeks).where("release_date <= ?", Time.now).order("RAND()").limit(1).first
       url = " https://open.spotify.com/track/#{track.t_id}"
